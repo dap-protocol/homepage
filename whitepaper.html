@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Dap is a decentralized naming system and certificate authority. It aims to be the secure DNS upgrade for everyone."/>
+    <meta name="viewport" content="initial-scale=1, viewport-fit=cover, width=device-width"/>
+
+    <title>Dap.sh &middot; The DNS upgrade for everyone</title>
+
+    <link rel="stylesheet" href="./reset.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css"/>
+
+    <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+
+    <style>
+      :root {
+        --code-black: #565868;
+        --code-blue: #489fe7;
+        --code-cobalt: #2e638b;
+        --code-gold: #c79e34;
+        --code-gray: #aeb1c0;
+        --code-green: #58ac61;
+        --code-pink: #e670b8;
+        --code-red: #ec675e;
+        --code-teal: #56b8b6;
+        --color-arctic: #fff;
+        --color-yang: #fcfcfc;
+        --color-yin: #1c1c1c;
+        --padding: 2rem;
+      }
+
+      /** banner *********************************************************** START **/
+
+      aside {
+        background-color: var(--code-gold);
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, var(--color-yin) 10px, var(--color-yin) calc(2 * 10px));
+        color: var(--color-yang);
+        display: flex;
+        font-weight: 600;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 800px;
+        padding: var(--padding);
+        position: sticky;
+        top: 0;
+        width: 100%;
+
+        @media (max-width: 900px) {
+          flex-direction: column;
+        }
+      }
+
+      aside::before {
+        width: 100%; height: 100%;
+        top: 0; left: 0;
+
+        background-color: var(--color-yin);
+        content: "";
+        opacity: 0.3;
+        position: absolute;
+      }
+
+      aside p {
+        padding: 0 0.5rem;
+
+        background-color: var(--code-gold);
+        letter-spacing: 0.05rem;
+        position: relative;
+        width: fit-content;
+
+        @media (min-width: 901px) {
+          margin: auto;
+        }
+      }
+
+      aside p:not(:first-of-type) {
+        @media (max-width: 900px) {
+          margin-top: var(--padding);
+        }
+      }
+
+      /** overall styling ************************************************** START **/
+
+      html,
+      body {
+        width: 100%; height: 100%;
+      }
+
+      html {
+        font-size: 12px;
+      }
+
+      body {
+        background-color: var(--color-yang);
+        color: var(--color-yin);
+        font-family: system-ui;
+        font-size: 1.5rem;
+        line-height: 1.55;
+      }
+
+      section {
+        margin-left: auto;
+        margin-right: auto;
+        overflow-x: hidden;
+      }
+
+      section > *:not(pre) {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 800px;
+
+        @media (max-width: 900px) {
+          padding-left: var(--padding);
+          padding-right: var(--padding);
+        }
+      }
+
+
+      section > * + * {
+        margin-top: var(--padding);
+      }
+
+      section:first-of-type {
+        padding-top: calc(var(--padding) * 2);
+      }
+
+      section:last-of-type {
+        padding-bottom: calc(var(--padding) * 2);
+      }
+
+      section:not(:first-of-type) {
+        margin-top: var(--padding);
+      }
+
+      ol,
+      ul {
+        padding-left: var(--padding);
+      }
+
+      p {
+        text-wrap: pretty;
+      }
+
+      a {
+        color: var(--code-blue);
+      }
+
+      a:visited {
+        color: var(--code-cobalt);
+      }
+
+      /** code blocks ****************************************************** START **/
+
+      li pre {
+        margin-bottom: var(--padding);
+        margin-top: var(--padding);
+      }
+
+      pre {
+        background-color: var(--color-arctic);
+        font-size: 1.25rem;
+        position: relative;
+
+        @media (max-width: 900px) {
+          width: 100vw;
+        }
+      }
+
+      pre::before,
+      pre::after {
+        width: 100%; height: 100%;
+
+        background-color: inherit;
+        background-image: inherit;
+        content: "";
+        position: absolute;
+        top: 0;
+      }
+
+      pre::before {
+        left: -100%;
+      }
+
+      pre::after {
+        right: -100%;
+      }
+
+      pre code {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 800px;
+        position: relative;
+        width: 100%;
+      }
+
+      .dedent code {
+        transform: translateX(calc(var(--padding) * -1));
+      }
+
+      /** code syntax highlighting ***************************************** START **/
+
+      .hljs {
+        background-color: transparent;
+        color: var(--code-gray);
+      }
+
+      .hljs-params,
+      .hljs-title {
+        color: var(--code-black);
+      }
+
+      .hljs-title.class_,
+      .hljs-variable.language_ {
+        color: var(--code-teal);
+      }
+
+      .hljs-attr {
+        color: var(--code-cobalt);
+      }
+
+      .hljs-built_in {
+        color: var(--code-green);
+      }
+
+      .hljs-comment {
+        color: var(--code-gray);
+      }
+
+      .hljs-keyword {
+        color: var(--code-pink);
+      }
+
+      .hljs-number {
+        color: var(--code-red);
+      }
+
+      .hljs-string {
+        color: var(--code-gold);
+      }
+
+      .hljs-title.function_ {
+        color: var(--code-blue);
+      }
+    </style>
+  </head>
+
+  <body>
+    <aside>
+      <p>WARNING: ROUGH DRAFT IN‑PROGRESS WHITEPAPER</p>
+      <p>UPDATED: 2025.01.25</p>
+    </aside>
+
+    <section id="abstract">
+      <h1>Dap: A Community‑Driven Fork of the Handshake Protocol</h1>
+      <h2>Abstract</h2>
+
+      <p>Dap enhances the <a href="https://handshake.org?ref=dap.sh" target="_blank">Handshake protocol</a> to create a more accessible and utility‑focused decentralized naming system. While Handshake laid the groundwork for blockchain‑based DNS resolution, real‑world adoption has been limited by complex registration mechanisms and misaligned incentives favoring speculation over utility. Dap addresses these limitations through streamlined name registration, enhanced security, and improved economic incentives that prioritize network stability and development over token speculation.</p>
+    </section>
+
+    <section id="introduction">
+      <h2>1. Introduction</h2>
+
+      <p>The <a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System&useskin=vector&ref=dap.sh" target="_blank">Domain Name System</a> (DNS) remains one of the most centralized components of the modern internet. While Handshake introduced a compelling vision for decentralizing the DNS root zone through blockchain technology, its initial implementation revealed several limitations that have hindered widespread adoption.</p>
+
+      <p>Dap maintains Handshake's core mission of decentralizing internet naming while addressing key technical and practical limitations. By refining Handshake's proven foundations rather than reinventing them, Dap aims to make decentralized naming more accessible, secure, and useful for everyday internet users.</p>
+    </section>
+
+    <section id="background">
+      <h2>2. Background and Motivation</h2>
+      <h3>2.1 The Handshake Vision</h3>
+
+      <p>Handshake was conceived as a decentralized protocol to serve as an alternative to <a href="https://icann.org?ref=dap.sh" target="_blank">ICANN</a>'s root zone management. Its key innovations included:</p>
+
+      <ul>
+        <li>A permissionless system for registering <a href="https://en.wikipedia.org/wiki/Top-level_domain?useskin=vector&ref=dap.sh" target="_blank">top‑level domain</a>s (TLDs)</li>
+        <li>Integration with existing DNS infrastructure</li>
+        <li>Novel proof‑of‑work consensus mechanism</li>
+        <li>Built‑in name auction system</li>
+        <li><a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System_Security_Extensions&useskin=vector&ref=dap.sh">DNSSEC</a>‑based ownership proofs</li>
+      </ul>
+
+      <h3>2.2 Identified Limitations</h3>
+
+      <p>Several issues have emerged that limit Handshake's potential:</p>
+
+      <ol>
+        <li>Complex Name Acquisition
+          <ul>
+            <li>High barrier to entry for non‑technical users</li>
+            <li>Extended waiting periods before names become usable</li>
+            <li>Auction mechanism complexity</li>
+          </ul>
+        </li>
+
+        <li>Integration Challenges
+          <ul>
+            <li>Limited adoption by DNS providers and registrars</li>
+            <li>Difficult path to mainstream browser support</li>
+            <li>Complexity in serving DNS records</li>
+          </ul>
+        </li>
+
+        <li>Technical Constraints
+          <ul>
+            <li>Mining centralization concerns</li>
+            <li>Inefficient block space utilization</li>
+            <li>Limited throughput for name operations</li>
+          </ul>
+        </li>
+
+        <li>Economic Misalignment
+          <ul>
+            <li>Focus on speculation over utility</li>
+            <li>Lack of incentives for DNS infrastructure</li>
+            <li>Insufficient funding for ongoing development</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section id="implementation">
+      <h2>3. Technical Implementation</h2>
+      <h3>3.1 Consensus Mechanism</h3>
+
+      <p>Dap adopts <a href="https://www.getmonero.org/resources/moneropedia/randomx.html?ref=dap.sh" target="_blank">RandomX</a> as its proof‑of‑work algorithm to promote decentralized participation in network security. RandomX is specifically designed for CPUs, making mining accessible to a broader range of participants while maintaining strong security properties.</p>
+
+      <p>Key characteristics:</p>
+
+      <ul>
+        <li>2GB RAM minimum requirement</li>
+        <li>CPU‑optimized execution</li>
+        <li>ASIC‑resistant design</li>
+        <li>Fair distribution of mining rewards</li>
+      </ul>
+
+      <h3>3.2 Name Registration System</h3>
+
+      <p>The registration system implements a phased release schedule with built‑in protections against speculation and squatting:</p>
+
+      <ol>
+        <li>Release Phases
+          <pre class="dedent"><code class="language-typescript">
+releaseSchedule: {
+  phases: [
+    {
+      claimWindow: "7 days",
+      deposit: 1000,
+      names: "Single characters, numbers",
+      type: "Premium"
+    },
+    {
+      claimWindow: "7 days",
+      deposit: 500,
+      names: "Two characters, dictionary words",
+      type: "Standard Plus"
+    },
+    {
+      claimWindow: "7 days",
+      deposit: 100,
+      names: "All remaining names",
+      type: "Standard"
+    }
+  ]
+}
+          </code></pre>
+        </li>
+
+        <li>Registration Process
+          <ul>
+            <li>7‑day claim window for each phase</li>
+            <li>Deposit requirement based on name type</li>
+            <li>Multiple parties can place deposits</li>
+            <li>Auctions for contested names</li>
+            <li>14‑day waiting period for uncontested names</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>3.3 Economic Model</h3>
+
+      <p><strong>The economic model prioritizes sustainable development and network stability over token speculation</strong>:</p>
+
+      <ol>
+        <li>Fee Distribution
+          <pre class="dedent"><code class="language-typescript">
+distribution: {
+  community: "20%", // Grants, education, tools
+  operators: "30%", // DNS infrastructure providers
+  protocol: "40%",  // Core protocol development
+  treasury: "10%"   // Emergency/future funding
+}
+          </code></pre>
+        </li>
+
+        <li>Operator Incentives
+          <ul>
+            <li>Rewards based on uptime and performance</li>
+            <li>Geographic distribution bonuses</li>
+            <li>Query response time metrics</li>
+            <li>Record serving volume</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section id="architecture">
+      <h2>4. Network Architecture</h2>
+      <h3>4.1 Node Types</h3>
+
+      <p>The network supports three types of nodes to accommodate different use cases and resource capabilities:</p>
+
+      <ol>
+        <li>Full Nodes
+          <ul>
+            <li>Store complete blockchain</li>
+            <li>Validate all transactions</li>
+            <li>Serve DNS records</li>
+            <li>Participate in mining</li>
+            <li>Full consensus participation</li>
+          </ul>
+        </li>
+
+        <li>Light Nodes
+          <ul>
+            <li>Store block headers</li>
+            <li>Verify proofs</li>
+            <li>Basic DNS resolution</li>
+            <li>Mobile‑friendly</li>
+          </ul>
+        </li>
+
+        <li>DNS‑Only Nodes
+          <ul>
+            <li>Focus on DNS serving</li>
+            <li>Optional blockchain validation</li>
+            <li>High performance</li>
+            <li>Enhanced caching</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>4.2 DNS Integration</h3>
+
+      <p>Dap maintains compatibility with existing DNS infrastructure while improving record management:</p>
+
+      <pre class="dedent-level-1"><code class="language-typescript">
+interface DNSSystem {
+  // DNSSEC configuration
+  dnssec: {
+    algorithms: ["ECDSA", "Ed25519"],
+    autoRenewal: boolean,
+    keyRotation: Duration
+  },
+  // Standard record types
+  records: {
+    custom: Map&lt;string, RecordTemplate>,
+    extended: ["TLSA", "CAA", "SRV"],
+    standard: ["A", "AAAA", "MX", "TXT", "CNAME"]
+  },
+  // Performance optimization
+  serving: {
+    caching: boolean,
+    ttl: Duration,
+    geographic: boolean
+  }
+}
+      </code></pre>
+    </section>
+
+    <section id="security">
+      <h2>5. Security Model</h2>
+      <h3>5.1 Threat Analysis</h3>
+
+      <p>The security model addresses several key threats:</p>
+
+      <ol>
+        <li>Network Security
+          <ul>
+            <li>51% attacks mitigated by RandomX</li>
+            <li>Sybil resistance through PoW</li>
+            <li>Eclipse attack protection</li>
+            <li>DDoS mitigation</li>
+          </ul>
+        </li>
+
+        <li>Name System Security
+          <ul>
+            <li>Front‑running protection through claim windows</li>
+            <li>Economic barriers to squatting</li>
+            <li>Registration phase protections</li>
+            <li>Dispute resolution mechanisms</li>
+          </ul>
+        </li>
+
+        <li>DNS Security
+          <ul>
+            <li>DNSSEC integration</li>
+            <li>Record tampering protection</li>
+            <li>Cache poisoning prevention</li>
+            <li>MitM attack mitigation</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>5.2 Economic Security</h3>
+
+      <p>Economic mechanisms protect against abuse while ensuring sustainable development:</p>
+
+      <pre class="dedent-level-1"><code class="language-typescript">
+interface SecurityMechanisms {
+  registration: {
+    // Auction mechanics
+    auctions: {
+      extensionTime: "1 day",
+      minBidIncrease: "10%",
+      minDuration: "3 days"
+    },
+    // Claim window deposits
+    deposits: {
+      lockPeriod: "30 days",
+      minimums: Map&lt;NameType, Amount>,
+      returnPeriod: "7 days"
+    }
+  },
+  operations: {
+    // Infrastructure incentives
+    rewards: {
+      distribution: "20%",
+      performance: "30%",
+      records: "20%",
+      uptime: "30%"
+    }
+  }
+}
+      </code></pre>
+    </section>
+
+    <section id="applications">
+      <h2>6. Applications and Use Cases</h2>
+      <h3>6.1 Decentralized Services</h3>
+
+      <ol>
+        <li>Domain Registrars
+          <pre class="dedent"><code class="language-typescript">
+class ModernRegistrar {
+  async registerName(name: string) {
+    // Check phase eligibility
+    const phase = await network.getCurrentPhase();
+
+    if (!phase.isEligible(name))
+      throw new Error("Name not available in current phase");
+
+    // Place deposit
+    const deposit = await this.calculateDeposit(name);
+    await this.submitDeposit(name, deposit);
+
+    // Monitor claim window
+    return await this.monitorRegistration(name);
+  }
+}
+          </code></pre>
+        </li>
+
+        <li>DNS Providers
+          <pre class="dedent"><code class="language-typescript">
+class DNSProvider {
+  // High‑availability DNS serving
+  async serveRecords(name: string) {
+    // Fetch and verify records
+    const records = await this.getVerifiedRecords(name);
+
+    // Distribute to edge locations
+    await this.distributeRecords(records);
+
+    // Monitor and earn rewards
+    this.startMetricsCollection();
+  }
+}
+          </code></pre>
+        </li>
+      </ol>
+
+      <h3>6.2 Integration Examples</h3>
+
+      <ol>
+        <li>Web Hosting
+          <pre class="dedent"><code class="language-typescript">
+class HostingPlatform {
+  async deployWebsite(name: string, content: Site) {
+    // Configure DNS
+    await this.configureDNS(name);
+
+    // Deploy content
+    await this.deployContent(content);
+
+    // Setup monitoring
+    await this.setupMonitoring(name);
+  }
+}
+          </code></pre>
+        </li>
+
+        <li>Identity Services
+          <pre class="dedent"><code class="language-typescript">
+class IdentityProvider {
+  async verifyDomainOwnership(name: string) {
+    // Verify on‑chain ownership
+    const owner = await network.verifyOwner(name);
+
+    // Check DNS control
+    await this.verifyDNSControl(name, owner);
+
+    // Issue credentials
+    return this.issueCredentials(name, owner);
+  }
+}
+          </code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section id="future">
+      <h2>7. Future Development</h2>
+      <h3>7.1 Technical Roadmap</h3>
+
+      <ol>
+        <li>Phase 1: Foundation (0‑6 months)
+          <ul>
+            <li>Core protocol implementation</li>
+            <li>Basic tooling</li>
+            <li>Initial network bootstrap</li>
+          </ul>
+        </li>
+
+        <li>Phase 2: Integration (6‑12 months)
+          <ul>
+            <li>Browser integration</li>
+            <li>Mobile support</li>
+            <li>API development</li>
+            <li>Business tools</li>
+          </ul>
+        </li>
+
+        <li>Phase 3: Scaling (12‑24 months)
+          <ul>
+            <li>Performance optimizations</li>
+            <li>Advanced features</li>
+            <li>Enterprise solutions</li>
+            <li>Cross‑chain integration</li>
+          </ul>
+        </li>
+      </ol>
+
+      <h3>7.2 Community Development</h3>
+
+      <ol>
+        <li>Development Support
+          <ul>
+            <li>Grant programs</li>
+            <li>Developer documentation</li>
+            <li>Integration guides</li>
+            <li>Reference implementations</li>
+          </ul>
+        </li>
+
+        <li>Infrastructure Growth
+          <ul>
+            <li>Operator incentives</li>
+            <li>Geographic expansion</li>
+            <li>Performance improvements</li>
+            <li>Tooling development</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <section id="conclusion">
+      <h2>8. Conclusion</h2>
+
+      <p>Dap builds upon Handshake's foundation to create a more accessible and practical decentralized naming system. By focusing on real‑world usability while maintaining strong security principles, Dap aims to accelerate the adoption of decentralized internet naming.</p>
+
+      <p>The key improvements include:</p>
+
+      <ul>
+        <li>Simplified yet protective registration system</li>
+        <li>RandomX mining for better decentralization</li>
+        <li>Sustainable funding for development and operations</li>
+        <li>Improved DNS integration</li>
+        <li>Focus on utility over speculation</li>
+      </ul>
+
+      <p>Through these improvements, Dap provides a foundation for a more open, secure, and user‑controlled internet naming system.</p>
+    </section>
+
+    <section id="appendix">
+      <h1>Appendices</h1>
+    </section>
+
+    <section id="appendix-a">
+      <h2>Appendix A: Technical Specifications</h2>
+
+      <h3>A.1 Protocol Constants</h3>
+
+      <pre class="dedent-level-1"><code class="language-typescript">
+const PROTOCOL_CONSTANTS = {
+  // Block parameters
+  BLOCK_TIME: 600,             // 10 minutes
+  DIFFICULTY_ADJUSTMENT: 2016, // ~2 weeks
+  MAX_BLOCK_SIZE: 4_000_000,   // 4MB
+
+  // RandomX parameters
+  MEMORY_SIZE: 2 * 1024 * 1024 * 1024, // 2GB
+  PROGRAM_ITERATIONS: 1024,
+  PROGRAM_SIZE: 256,
+  SCRATCHPAD_SIZE: 2 * 1024 * 1024,    // 2MB
+
+  // Network parameters
+  DEFAULT_PORT: 12035,
+  MAX_PEERS: 128,
+  PROTOCOL_VERSION: 1,
+
+  // Name system parameters
+  CLAIM_WINDOW: 604800,  // 7 days in seconds
+  EXTENSION_TIME: 86400, // 1 day in seconds
+  MAX_NAME_LENGTH: 63,   // DNS standard
+  MIN_NAME_LENGTH: 1,
+  WAIT_PERIOD: 1209600   // 14 days in seconds
+};
+      </code></pre>
+
+      <h3>A.2 Data Structures</h3>
+
+      <ol>
+        <li>Blocks
+          <pre class="dedent"><code class="language-typescript">
+interface Block {
+  header: {
+    bits: number,
+    merkleRoot: Hash,
+    nonce: number,
+    prevBlock: Hash,
+    time: number,
+    version: number
+  },
+  nameOperations: NameOp[],
+  transactions: Transaction[]
+}
+          </code></pre>
+        </li>
+
+        <li>Name Records
+          <pre class="dedent"><code class="language-typescript">
+interface NameRecord {
+  expires: number,
+  name: string,
+  owner: PublicKey,
+  records: {
+    dns: DNSRecord[],
+    dnssec: DNSSECConfig,
+    metadata: Map&lt;string, string>
+  },
+  registered: number,
+  status: "Active" | "InAuction" | "InClaimWindow" | "InWaitPeriod"
+}
+          </code></pre>
+        </li>
+      </ol>
+
+      <h3>A.3 Network Protocol</h3>
+
+      <ol>
+        <li>Message Types
+          <pre class="dedent"><code class="language-typescript">
+enum MessageType {
+  ALERT = 11,    // Network alerts
+  BLOCKS = 4,    // Block data
+  GETBLOCKS = 3, // Request block headers
+  GETDATA = 8,   // Request specific data
+  GETNAMES = 5,  // Request name data
+  INV = 7,       // Inventory announcement
+  MEMPOOL = 9,   // Request mempool contents
+  NAMES = 6,     // Name data
+  TX = 10,       // Transaction data
+  VERACK = 2,    // Version acknowledgment
+  VERSION = 1    // Protocol version exchange
+}
+          </code></pre>
+        </li>
+
+        <li>Consensus Rules
+          <pre class="dedent"><code class="language-typescript">
+interface ConsensusRules {
+  // Block validation
+  block: {
+    // Must build on heaviest chain
+    chainWeight: "cumulative-work",
+    // Difficulty adjusts every 2016 blocks
+    difficultyAdjustment: 2016,
+    // Maximum size including all data
+    maxSize: 4_000_000,
+    // Must maintain 10‑minute average spacing
+    spacing: 600
+  },
+  // Name operations
+  names: {
+    // Cannot front‑run auctions
+    auctionRules: true,
+    // Only one active claim window per name
+    uniqueClaims: true,
+    // Must complete wait period
+    waitPeriod: true
+  }
+}
+          </code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section id="appendix-b">
+      <h2>Appendix B: API Reference<h2>
+      <h3>B.1 Node API</h3>
+
+      <ol>
+        <li>Name Operations
+          <pre class="dedent"><code class="language-typescript">
+class NameAPI {
+  // Query operations
+  async lookup(name: string): Promise&lt;NameRecord> {
+    // Verify name format
+    this.validateName(name);
+
+    // Check local state first
+    const local = await this.state.lookup(name);
+
+    if (local)
+      return local;
+
+    // Query network if not found locally
+    return await this.network.lookup(name);
+  }
+
+  async checkAvailability(name: string): Promise<{
+    available: boolean,
+    earliestAvailable: number,
+    phase: Phase
+  }> {
+    // Check current registration phase
+    const phase = await this.getCurrentPhase();
+
+    // Verify name eligibility
+    return this.checkEligibility(name, phase);
+  }
+
+  async register(name: string, options: {
+    deposit: Amount,
+    owner: PublicKey,
+    records?: DNSRecord[]
+  }): Promise<Result> {
+    // Validate registration request
+    await this.validateRegistration(name, options);
+
+    // Submit deposit
+    const deposit = await this.submitDeposit(options.deposit);
+
+    // Enter claim window
+    return await this.enterClaimWindow(name, deposit);
+  }
+}
+          </code></pre>
+        </li>
+
+        <li>Network Operations
+          <pre class="dedent"><code class="language-typescript">
+class NetworkAPI {
+  async broadcast(tx: Transaction): Promise&lt;string> {
+    // Validate transaction
+    await this.validateTransaction(tx);
+
+    // Get connected peers
+    const peers = await this.getPeers();
+
+    // Broadcast to all peers
+    return await this.broadcastToPeers(peers, tx);
+  }
+
+  // Peer management
+  async connect(peer: string): Promise&lt;boolean> {
+    // Validate peer address
+    this.validatePeer(peer);
+
+    // Establish connection
+    const connection = await this.createConnection(peer);
+
+    // Handshake
+    return await this.performHandshake(connection);
+  }
+}
+          </code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section id="appendix-c">
+      <h2>Appendix C: Implementation Guide</h2>
+      <h3>C.1 Setting Up a Node</h3>
+
+      <ol>
+        <li>Basic Installation
+          <pre class="dedent"><code class="language-shell">
+# Install dependencies
+apt-get update
+apt-get install -y \
+  build-essential \
+  cmake \
+  libssl-dev \
+  git
+
+# Clone repository
+git clone https://github.com/[project]/[name]
+cd [name]
+
+# Build
+mkdir build
+cd build
+cmake ..
+make
+          </code></pre>
+        </li>
+
+        <li>Configuration
+          <pre class="dedent"><code class="language-yaml">
+# config.yaml
+dns:
+  port: 53
+  recursive: false
+  serve: true
+
+mempool:
+  maxmemory: "2GB" # Maximum memory usage
+  maxsize: 300000  # Maximum transaction count
+
+mining:
+  enabled: true
+  threads: 4       # Number of mining threads
+
+network:
+  maxpeers: 50
+  port: 12035
+
+node:
+  datadir: "/data"
+  type: "full"     # full, light, or dns-only
+          </code></pre>
+        </li>
+      </ol>
+
+      <h3>C.2 Running a Registrar Service</h3>
+
+      <pre class="dedent-level-1"><code class="language-typescript">
+class Registrar {
+  constructor(config: Config) {
+    this.node = new Node(config);
+    this.db = new Database(config.database);
+    this.monitoring = new Monitoring();
+  }
+
+  async handleRegistration(request: RegRequest) {
+    // Verify phase eligibility
+    const phase = await this.node.getCurrentPhase();
+
+    if (!phase.isEligible(request.name))
+      throw new Error("Name not available in current phase");
+
+    // Calculate deposit
+    const deposit = this.calculateDeposit(request.name);
+
+    // Process deposit
+    const receipt = await this.processDeposit(request.payment);
+
+    // Enter claim window
+    const claim = await this.node.enterClaimWindow(request.name, {
+      deposit: deposit,
+      owner: request.owner
+    });
+
+    // Monitor status
+    this.monitorClaim(claim);
+
+    return claim;
+  }
+
+  async start() {
+    // Initialize services
+    await this.node.connect();
+    await this.setupAPI();
+    await this.startMonitoring();
+
+    // Start processing registrations
+    this.processQueue();
+  }
+}
+      </code></pre>
+    </section>
+
+    <section id="appendix-d">
+      <h2>Appendix D: Economic Analysis</h2>
+      <h3>D.1 Network Costs</h3>
+
+      <ol>
+        <li>Infrastructure Requirements
+          <pre class="dedent"><code class="language-typescript">
+const operationalCosts = {
+  // Operating costs (monthly)
+  costs: {
+    bandwidth: "$30-50",
+    electricity: "$20-40",
+    infrastructure: "$50-100"
+  },
+  // Hardware requirements
+  hardware: {
+    bandwidth: "100Mbps+",
+    cpu: "4+ cores",
+    memory: "8GB minimum",
+    storage: "100GB+ SSD"
+  }
+};
+          </code></pre>
+        </li>
+
+        <li>Fee Distribution Model
+          <pre class="dedent"><code class="language-typescript">
+const feeAllocation = {
+  // Community allocation (20%)
+  community: {
+    education: "5%",  // Documentation/training
+    grants: "10%",    // Developer grants
+    outreach: "5%"    // Community building
+  },
+  // Development allocation (40%)
+  development: {
+    core: "15%",      // Core protocol
+    research: "5%",   // Research/innovation
+    security: "10%",  // Security/audits
+    tools: "10%"      // Developer tools
+  },
+  // Operations allocation (30%)
+  operations: {
+    dns: "15%",       // DNS infrastructure
+    monitoring: "5%", // System monitoring
+    network: "10%"    // Network operations
+  },
+  // Reserve allocation (10%)
+  reserve: {
+    emergency: "5%",  // Emergency fund
+    future: "5%"      // Future development
+  }
+};
+          </code></pre>
+        </li>
+      </ol>
+
+      <h3>D.2 Market Analysis</h3>
+
+      <ol>
+        <li>Target Segments
+          <pre class="dedent"><code class="language-typescript">
+const marketSegments = {
+  developers: {
+    avgNames: 3.2,
+    percentage: "5%",
+    useCase: "Development/testing"
+  },
+  enterprise: {
+    avgNames: 5.7,
+    percentage: "20%",
+    useCase: "Corporate infrastructure"
+  },
+  individuals: {
+    avgNames: 1.5,
+    percentage: "40%",
+    useCase: "Personal domains, projects"
+  },
+  smallBusiness: {
+    avgNames: 2.3,
+    percentage: "35%",
+    useCase: "Business presence"
+  }
+};
+          </code></pre>
+        </li>
+
+        <li>Growth Projections
+          <pre class="dedent"><code class="language-typescript">
+const projections = {
+  year1: {
+    names: 100000,
+    operators: 500,
+    revenue: "$1M equivalent"
+  },
+  year2: {
+    names: 500000,
+    operators: 2000,
+    revenue: "$5M equivalent"
+  },
+  year3: {
+    names: 2000000,
+    operators: 5000,
+    revenue: "$20M equivalent"
+  }
+};
+          </code></pre>
+        </li>
+      </ol>
+    </section>
+  </body>
+
+  <script>hljs.highlightAll();</script>
+</html>

@@ -5,7 +5,7 @@
     <meta name="description" content="Dap is a decentralized naming system and certificate authority. It aims to be the secure DNS upgrade for everyone."/>
     <meta name="viewport" content="initial-scale=1, viewport-fit=cover, width=device-width"/>
 
-    <title>Dap.sh &middot; The DNS upgrade for everyone</title>
+    <title>Dap &middot; The DNS upgrade for everyone</title>
 
     <link rel="stylesheet" href="./reset.css"/>
     <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/styles/default.min.css"/>
@@ -115,7 +115,6 @@
         }
       }
 
-
       section > * + * {
         margin-top: var(--padding);
       }
@@ -147,6 +146,14 @@
 
       a:visited {
         color: var(--code-cobalt);
+      }
+
+      hr {
+        width: 100%; height: 1px;
+
+        background-color: var(--code-gray);
+        margin-top: var(--padding);
+        opacity: 0.15;
       }
 
       /** code blocks ****************************************************** START **/
@@ -247,871 +254,794 @@
 
   <body>
     <aside>
-      <p>WARNING: ROUGH DRAFT IN‑PROGRESS WHITEPAPER</p>
-      <p>UPDATED: 2025.01.25</p>
+      <p>WARNING: DRAFT 4 — IN‑PROGRESS WHITEPAPER</p>
+      <p>UPDATED: 2025.08.21</p>
     </aside>
 
     <section id="abstract">
-      <h1>Dap: A Community‑Driven Fork of the Handshake Protocol</h1>
-      <h2>Abstract</h2>
+      <h1>Abstract</h1>
 
-      <p>Dap enhances the <a href="https://handshake.org?ref=dap.sh" target="_blank">Handshake protocol</a> to create a more accessible and utility‑focused decentralized naming system. While Handshake laid the groundwork for blockchain‑based DNS resolution, real‑world adoption has been limited by complex registration mechanisms and misaligned incentives favoring speculation over utility. Dap addresses these limitations through streamlined name registration, enhanced security, and improved economic incentives that prioritize network stability and development over token speculation.</p>
+      <p>The internet’s naming system remains under the centralized control of the Internet Corporation for Assigned Names and Numbers (<a href="https://icann.org?ref=dap.sh" target="_blank">ICANN</a>), requiring million‑dollar fees and bureaucratic approval processes for new top‑level domains. While <a href="https://handshake.org?ref=dap.sh" target="_blank">Handshake</a> attempted to solve this through pure decentralization, it has failed to produce a single notable product or use case in over five years, trapped by its own <a href="https://www.investopedia.com/terms/b/bitcoin-maximalism.asp?ref=dap.sh" target="_blank">Bitcoin maximalist</a> ideology that refuses any coordination even when necessary for basic ecosystem development.</p>
+
+      <p>Dap represents a pragmatic alternative: decentralized enough to ensure censorship resistance and permissionless innovation, yet coordinated enough to ship products and serve users. We explicitly reject the purity spirals that paralyzed Handshake, choosing instead to measure success by applications built, users served, and real‑world utility created.</p>
+
+      <p>This paper introduces Dap’s technical architecture, economic model, and our philosophy of pragmatic decentralization that prioritizes shipping over philosophizing. Perfect decentralization without adoption is worthless. Dap chooses adoption.</p>
     </section>
 
     <section id="introduction">
-      <h2>1. Introduction</h2>
+      <h2>2. Introduction</h2>
+      <h3>2.1 The Current State of Internet Naming</h3>
 
-      <p>The <a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System&useskin=vector&ref=dap.sh" target="_blank">Domain Name System</a> (DNS) remains one of the most centralized components of the modern internet. While Handshake introduced a compelling vision for decentralizing the DNS root zone through blockchain technology, its initial implementation revealed several limitations that have hindered widespread adoption.</p>
-
-      <p>Dap maintains Handshake's core mission of decentralizing internet naming while addressing key technical and practical limitations. By refining Handshake's proven foundations rather than reinventing them, Dap aims to make decentralized naming more accessible, secure, and useful for everyday internet users.</p>
-    </section>
-
-    <section id="background">
-      <h2>2. Background and Motivation</h2>
-      <h3>2.1 The Handshake Vision</h3>
-
-      <p>Handshake was conceived as a decentralized protocol to serve as an alternative to <a href="https://icann.org?ref=dap.sh" target="_blank">ICANN</a>'s root zone management. Its key innovations included:</p>
+      <p>Since 1998, ICANN has maintained monopolistic control over the internet’s root naming system. Creating a new <a href="https://en.wikipedia.org/wiki/Top-level_domain?useskin=vector&ref=dap.sh" target="_blank">top‑level domain</a> (TLD) requires:</p>
 
       <ul>
-        <li>A permissionless system for registering <a href="https://en.wikipedia.org/wiki/Top-level_domain?useskin=vector&ref=dap.sh" target="_blank">top‑level domain</a>s (TLDs)</li>
-        <li>Integration with existing DNS infrastructure</li>
-        <li>Novel proof‑of‑work consensus mechanism</li>
-        <li>Built‑in name auction system</li>
-        <li><a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System_Security_Extensions&useskin=vector&ref=dap.sh">DNSSEC</a>‑based ownership proofs</li>
+        <li>A $185,000 non‑refundable application fee</li>
+        <li>Years of bureaucratic review processes</li>
+        <li>Proof of technical and financial capability</li>
+        <li>Compliance with extensive policies and restrictions</li>
+        <li>Ongoing contractual obligations and fees</li>
       </ul>
 
-      <h3>2.2 Identified Limitations</h3>
+      <p>This system has resulted in ~1,500 TLDs existing after decades of internet growth, with control concentrated among a handful of large registry operators. Innovation is stifled, prices remain high, and entire communities and businesses are excluded from owning their namespace.</p>
 
-      <p>Several issues have emerged that limit Handshake's potential:</p>
+      <h3>2.2 Why Handshake Failed to Deliver</h3>
 
-      <ol>
-        <li>Complex Name Acquisition
-          <ul>
-            <li>High barrier to entry for non‑technical users</li>
-            <li>Extended waiting periods before names become usable</li>
-            <li>Auction mechanism complexity</li>
-          </ul>
-        </li>
-
-        <li>Integration Challenges
-          <ul>
-            <li>Limited adoption by DNS providers and registrars</li>
-            <li>Difficult path to mainstream browser support</li>
-            <li>Complexity in serving DNS records</li>
-          </ul>
-        </li>
-
-        <li>Technical Constraints
-          <ul>
-            <li>Mining centralization concerns</li>
-            <li>Inefficient block space utilization</li>
-            <li>Limited throughput for name operations</li>
-          </ul>
-        </li>
-
-        <li>Economic Misalignment
-          <ul>
-            <li>Focus on speculation over utility</li>
-            <li>Lack of incentives for DNS infrastructure</li>
-            <li>Insufficient funding for ongoing development</li>
-          </ul>
-        </li>
-      </ol>
-    </section>
-
-    <section id="implementation">
-      <h2>3. Technical Implementation</h2>
-      <h3>3.1 Consensus Mechanism</h3>
-
-      <p>Dap adopts <a href="https://www.getmonero.org/resources/moneropedia/randomx.html?ref=dap.sh" target="_blank">RandomX</a> as its proof‑of‑work algorithm to promote decentralized participation in network security. RandomX is specifically designed for CPUs, making mining accessible to a broader range of participants while maintaining strong security properties.</p>
-
-      <p>Key characteristics:</p>
+      <p>Handshake launched in 2020 with the promise of decentralizing domain names. The technology works—the blockchain runs, names can be registered, <a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System&useskin=vector&ref=dap.sh" target="_blank">DNS</a> records can be set. Yet after five years:</p>
 
       <ul>
-        <li>2GB RAM minimum requirement</li>
-        <li>CPU‑optimized execution</li>
-        <li>ASIC‑resistant design</li>
-        <li>Fair distribution of mining rewards</li>
+        <li><strong>Zero notable products</strong> have been built on Handshake</li>
+        <li><strong>Zero major websites</strong> use Handshake names</li>
+        <li><strong>Zero services</strong> provide utility to end users</li>
+        <li><strong>The community has abandoned the project</strong></li>
       </ul>
 
-      <h3>3.2 Name Registration System</h3>
+      <p>Why? The answer isn’t technical—it’s cultural.</p>
 
-      <p>The registration system implements a phased release schedule with built‑in protections against speculation and squatting:</p>
+      <p>Handshake’s community inherited Bitcoin maximalism’s most toxic trait: an absolute refusal to coordinate or centralize anything, even temporarily, even when necessary for basic ecosystem development. This manifested as:</p>
 
-      <ol>
-        <li>Release Phases
-          <pre class="dedent"><code class="language-typescript">
-releaseSchedule: {
-  phases: [
-    {
-      claimWindow: "7 days",
-      deposit: 1000,
-      names: "Single characters, numbers",
-      type: "Premium"
-    },
-    {
-      claimWindow: "7 days",
-      deposit: 500,
-      names: "Two characters, dictionary words",
-      type: "Standard Plus"
-    },
-    {
-      claimWindow: "7 days",
-      deposit: 100,
-      names: "All remaining names",
-      type: "Standard"
-    }
-  ]
-}
-          </code></pre>
-        </li>
+      <p><strong>The Purity Trap</strong>: Any suggestion of coordination, funding, or leadership was attacked as "centralization" and rejected, regardless of practical benefits.</p>
 
-        <li>Registration Process
-          <ul>
-            <li>7‑day claim window for each phase</li>
-            <li>Deposit requirement based on name type</li>
-            <li>Multiple parties can place deposits</li>
-            <li>Auctions for contested names</li>
-            <li>14‑day waiting period for uncontested names</li>
-          </ul>
-        </li>
-      </ol>
+      <p><strong>Technical Superiority Complex</strong>: The community became satisfied with having built "the best decentralized naming system" technically, while ignoring that nobody uses it.</p>
 
-      <h3>3.3 Economic Model</h3>
+      <p><strong>Coordination Failure</strong>: Without any organizing force, developers received no support, users found no applications, and the ecosystem stagnated. The community wouldn’t even coordinate on basic marketing or developer documentation.</p>
 
-      <p><strong>The economic model prioritizes sustainable development and network stability over token speculation</strong>:</p>
+      <p><strong>Complacency Disease</strong>: The combination of technical pride and ideological purity created a complacent community that confused potential with achievement. "We built it perfectly" became an excuse for never shipping anything people want.</p>
 
-      <ol>
-        <li>Fee Distribution
-          <pre class="dedent"><code class="language-typescript">
-distribution: {
-  community: "20%", // Grants, education, tools
-  operators: "30%", // DNS infrastructure providers
-  protocol: "40%",  // Core protocol development
-  treasury: "10%"   // Emergency/future funding
-}
-          </code></pre>
-        </li>
+      <p>As one developer noted: <em>"There are no products on Handshake. There are no websites on Handshake. There are no services on Handshake. There is little to no community on Handshake…no reason for dedicated builders to stay."</em></p>
 
-        <li>Operator Incentives
-          <ul>
-            <li>Rewards based on uptime and performance</li>
-            <li>Geographic distribution bonuses</li>
-            <li>Query response time metrics</li>
-            <li>Record serving volume</li>
-          </ul>
-        </li>
-      </ol>
+      <h3>2.3 Dap’s Philosophy: Pragmatic Decentralization</h3>
+
+      <p>Dap learns from Handshake’s failure by explicitly choosing pragmatism over purity:</p>
+
+      <p><strong>Ship First, Philosophize Later</strong>: We measure success by working products in users’ hands, not theoretical superiority in whitepapers.</p>
+
+      <p><strong>Strategic Coordination</strong>: We accept that initial centralization—for funding, development, and ecosystem building—is not just acceptable but necessary. The alternative is Handshake’s graveyard of potential.</p>
+
+      <p><strong>Builder‑Centric</strong>: Every decision is evaluated by one question: "Does this help builders ship products?" If yes, we do it, regardless of ideological concerns.</p>
+
+      <p><strong>Results Over Ideology</strong>: We judge ourselves by metrics that matter: active users, DNS queries served, revenue generated, and businesses built. Not by decentralization scores or ideological purity.</p>
+
+      <p>We are building the naming system the internet needs, not the one that scores highest on cypherpunk purity tests.</p>
+    </section>
+
+    <section id="learning">
+      <h2>3. Learning from Handshake’s Mistakes</h2>
+      <h3>3.1 The Maximalist Paralysis</h3>
+
+      <p>Bitcoin maximalism served Bitcoin well in its early days, providing ideological cohesion and resistance to corporate capture. But when applied blindly to every blockchain project, it becomes a disease that prevents basic functionality.</p>
+
+      <p>Handshake’s community treated any coordination as betrayal:</p>
+
+      <ul>
+        <li>Proposing a development fund was "centralization"</li>
+        <li>Organizing marketing efforts was "centralization"</li>
+        <li>Having technical leadership was "centralization"</li>
+        <li>Even maintaining a roadmap was "centralization"</li>
+      </ul>
+
+      <p>The result was complete paralysis. No decisions could be made, no resources could be allocated, no priorities could be set. The project became a perfectly decentralized ghost town—technically operational but useless.</p>
+
+      <h3>3.2 The Builder Exodus</h3>
+
+      <p>Developers initially flocked to Handshake, excited by the technical possibilities. They left just as quickly when they discovered:</p>
+
+      <p><strong>No Ecosystem Support</strong>: Unlike successful platforms, Handshake offered no grants, no documentation, no developer relations, no technical support. Builders were on their own.</p>
+
+      <p><strong>No Clear Direction</strong>: Without leadership or roadmap, developers didn’t know what to build. Should they focus on browsers? Wallets? Applications? Nobody knew, and nobody could decide.</p>
+
+      <p><strong>Hostile Community</strong>: Practical suggestions were met with ideological lectures. Requests for coordination were treated as attacks on decentralization. Builders who wanted to ship products were told to "read the whitepaper."</p>
+
+      <p><strong>No Users</strong>: Even builders who persevered found no users for their applications. The community was more interested in holding tokens than using products.</p>
+
+      <p>The builders left for ecosystems that wanted them to succeed.</p>
+
+      <h3>3.3 Dap’s Different Approach</h3>
+
+      <p>Dap explicitly rejects Handshake’s failed approach:</p>
+
+      <p><strong>Ecosystem Fund</strong>: Yes, we have a centralized fund for developer grants, managed by a foundation. This is "centralization." It’s how successful ecosystems bootstrap. We’ll decentralize it over time, after we have an ecosystem worth decentralizing.</p>
+
+      <p><strong>Developer Relations Team</strong>: We employ people whose job is helping developers succeed. They write documentation, answer questions, review code, and provide support. Another "centralization" that helps people build.</p>
+
+      <p><strong>Product‑First Mentality</strong>: Our internal mantra is "What shipped this week?" Not "How decentralized are we?" or "What does the whitepaper say?" but "What can users do today they couldn’t do yesterday?"</p>
+
+      <p><strong>Pragmatic Governance</strong>: For the first two years, a small team makes decisions quickly. No months‑long governance debates about minor technical details. No committee paralysis. Decisions in days, not months.</p>
+
+      <p>We choose building over debating, shipping over philosophizing, and users over ideology.</p>
     </section>
 
     <section id="architecture">
-      <h2>4. Network Architecture</h2>
-      <h3>4.1 Node Types</h3>
+      <h2>4. Technical Architecture</h2>
+      <h3>4.1 Blockchain Layer</h3>
 
-      <p>The network supports three types of nodes to accommodate different use cases and resource capabilities:</p>
+      <p>Dap builds on the proven foundations of Bitcoin and Handshake while fixing their limitations. We use a UTXO‑based blockchain with enhanced covenants designed for domain name operations.</p>
 
-      <ol>
-        <li>Full Nodes
-          <ul>
-            <li>Store complete blockchain</li>
-            <li>Validate all transactions</li>
-            <li>Serve DNS records</li>
-            <li>Participate in mining</li>
-            <li>Full consensus participation</li>
-          </ul>
-        </li>
+      <p><strong>What We Keep</strong>:</p>
 
-        <li>Light Nodes
-          <ul>
-            <li>Store block headers</li>
-            <li>Verify proofs</li>
-            <li>Basic DNS resolution</li>
-            <li>Mobile‑friendly</li>
-          </ul>
-        </li>
+      <ul>
+        <li>UTXO model for simplicity and scalability</li>
+        <li>Proof‑of‑work for objective security</li>
+        <li>Covenant system for native naming operations</li>
+        <li>Open participation without permission</li>
+      </ul>
 
-        <li>DNS‑Only Nodes
-          <ul>
-            <li>Focus on DNS serving</li>
-            <li>Optional blockchain validation</li>
-            <li>High performance</li>
-            <li>Enhanced caching</li>
-          </ul>
-        </li>
-      </ol>
+      <p><strong>What We Improve</strong>:</p>
 
-      <h3>4.2 DNS Integration</h3>
+      <ul>
+        <li>Simplified covenant types focused on real‑world use cases</li>
+        <li>Enhanced scripting for complex TLD management</li>
+        <li>Optimized block structure for DNS data</li>
+        <li>Production‑ready immediately, not "eventually"</li>
+      </ul>
 
-      <p>Dap maintains compatibility with existing DNS infrastructure while improving record management:</p>
+      <p>We resist the temptation to over‑engineer. Every technical decision is evaluated against real‑world use cases, not theoretical possibilities.</p>
 
-      <pre class="dedent-level-1"><code class="language-typescript">
-interface DNSSystem {
-  // DNSSEC configuration
-  dnssec: {
-    algorithms: ["ECDSA", "Ed25519"],
-    autoRenewal: boolean,
-    keyRotation: Duration
-  },
-  // Standard record types
-  records: {
-    custom: Map&lt;string, RecordTemplate>,
-    extended: ["TLSA", "CAA", "SRV"],
-    standard: ["A", "AAAA", "MX", "TXT", "CNAME"]
-  },
-  // Performance optimization
-  serving: {
-    caching: boolean,
-    ttl: Duration,
-    geographic: boolean
-  }
-}
-      </code></pre>
+      <h3>4.2 Consensus: Practical Innovation</h3>
+
+      <p>Dap implements a revolutionary consensus mechanism combining three proven technologies:</p>
+
+      <p><strong>Verifiable Delay Functions (VDF)</strong>: Replace pure computational work with time‑based proofs, reducing energy consumption by 95% while maintaining security. Miners prove elapsed time, not wasted computation.</p>
+
+      <p><strong>Verifiable Random Functions (VRF)</strong>: Provide provably fair randomness for block producer selection and auction resolution. No more mining pool centralization or auction manipulation.</p>
+
+      <p><strong>Blake3 Proof‑of‑Work</strong>: The fastest cryptographic hash function available, providing ASIC resistance and efficient verification.</p>
+
+      <p>This "Trinity" design delivers:</p>
+
+      <ul>
+        <li>95% energy reduction versus traditional PoW</li>
+        <li>Predictable 5‑minute block times</li>
+        <li>Fair mining distribution without pools</li>
+        <li>Sustainable security model</li>
+      </ul>
+
+      <p>But we emphasize: <strong>Technical superiority means nothing without adoption</strong>. Handshake had "superior" technology. We judge our consensus by whether it enables products, not whether it wins academic awards.</p>
+
+      <h3>4.3 DNS Integration That Actually Works</h3>
+
+      <p>Unlike Handshake’s "build it and hope" approach, Dap launches with complete DNS integration:</p>
+
+      <p><strong>Day One Compatibility</strong>:</p>
+
+      <ul>
+        <li>Full DNS protocol support</li>
+        <li><a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System_Security_Extensions&useskin=vector&ref=dap.sh">DNSSEC</a> implementation</li>
+        <li>Standard resolver compatibility</li>
+        <li>Browser extensions for Chrome, Firefox, Safari</li>
+        <li>Mobile applications for iOS and Android</li>
+      </ul>
+
+      <p><strong>Advanced Features</strong>:</p>
+
+      <ul>
+        <li>SSH fingerprints (SSHFP)</li>
+        <li>TLS certificate pinning (TLSA)</li>
+        <li>Email authentication (DKIM/SPF/DMARC)</li>
+        <li>Custom record types for Web3</li>
+      </ul>
+
+      <p><strong>Measurable Success</strong>:</p>
+
+      <ul>
+        <li>Response time under 100ms</li>
+        <li>99.9% uptime target</li>
+        <li>Daily query volume tracking</li>
+        <li>User adoption metrics</li>
+      </ul>
+
+      <p>We don’t launch until DNS resolution works as well as traditional DNS. <strong>Users shouldn’t need to understand blockchain to use blockchain domains.</strong></p>
     </section>
 
-    <section id="security">
-      <h2>5. Security Model</h2>
-      <h3>5.1 Threat Analysis</h3>
+    <section id="strategy">
+      <h2>5. Ecosystem Development Strategy</h2>
+      <h3>5.1 The Anti‑Handshake Approach</h3>
 
-      <p>The security model addresses several key threats:</p>
+      <p>Where Handshake relied on spontaneous emergence, Dap actively cultivates its ecosystem:</p>
 
-      <ol>
-        <li>Network Security
-          <ul>
-            <li>51% attacks mitigated by RandomX</li>
-            <li>Sybil resistance through PoW</li>
-            <li>Eclipse attack protection</li>
-            <li>DDoS mitigation</li>
-          </ul>
-        </li>
+      <p><strong>Centralized Kickstart</strong>: The Dap Foundation initially coordinates development, funds builders, and drives adoption. This is temporary centralization for permanent decentralization. We’ll sunset the foundation’s special powers after achieving product‑market fit.</p>
 
-        <li>Name System Security
-          <ul>
-            <li>Front‑running protection through claim windows</li>
-            <li>Economic barriers to squatting</li>
-            <li>Registration phase protections</li>
-            <li>Dispute resolution mechanisms</li>
-          </ul>
-        </li>
+      <p><strong>Developer Grants</strong>: $10 million allocated for builders who ship products. Not researchers who write papers, not theorists who debate governance—builders who ship code users can use.</p>
 
-        <li>DNS Security
-          <ul>
-            <li>DNSSEC integration</li>
-            <li>Record tampering protection</li>
-            <li>Cache poisoning prevention</li>
-            <li>MitM attack mitigation</li>
-          </ul>
-        </li>
-      </ol>
+      <p><strong>Marketing Budget</strong>: Yes, we market. We advertise. We sponsor conferences. We create content. We do business development. Because products without users are expensive hobbies.</p>
 
-      <h3>5.2 Economic Security</h3>
+      <p><strong>Business Development</strong>: We actively pursue partnerships with registries, browsers, and applications. We don’t wait for organic adoption—we create it.</p>
 
-      <p>Economic mechanisms protect against abuse while ensuring sustainable development:</p>
+      <h3>5.2 Product‑First Roadmap</h3>
 
-      <pre class="dedent-level-1"><code class="language-typescript">
-interface SecurityMechanisms {
-  registration: {
-    // Auction mechanics
-    auctions: {
-      extensionTime: "1 day",
-      minBidIncrease: "10%",
-      minDuration: "3 days"
-    },
-    // Claim window deposits
-    deposits: {
-      lockPeriod: "30 days",
-      minimums: Map&lt;NameType, Amount>,
-      returnPeriod: "7 days"
-    }
-  },
-  operations: {
-    // Infrastructure incentives
-    rewards: {
-      distribution: "20%",
-      performance: "30%",
-      records: "20%",
-      uptime: "30%"
-    }
-  }
-}
-      </code></pre>
+      <p>Our success metrics are products and users, not protocol features:</p>
+
+      <p><strong>Testnet Goals</strong>:</p>
+
+      <ul>
+        <li>10+ working applications before mainnet</li>
+        <li>1,000+ active developers building</li>
+        <li>10,000+ daily active testnet users</li>
+        <li>Real businesses testing real models</li>
+      </ul>
+
+      <p><strong>Product Showcases</strong>:</p>
+
+      <ul>
+        <li>Weekly demo days for new applications</li>
+        <li>Monthly builder spotlights</li>
+        <li>Quarterly ecosystem reports</li>
+        <li>Annual developer conference</li>
+      </ul>
+
+      <p><strong>User Focus</strong>:</p>
+
+      <ul>
+        <li>Onboarding guides for non‑technical users</li>
+        <li>One‑click setup tools</li>
+        <li>Customer support (yes, actual support)</li>
+        <li>User feedback integration</li>
+      </ul>
+
+      <p>Every protocol decision is downstream from "What helps users?"</p>
+
+      <h3>5.3 Builder Incentives</h3>
+
+      <p>We explicitly favor builders over speculators:</p>
+
+      <p><strong>Testnet Rewards</strong>: Developers who build during testnet receive GRP token grants at mainnet launch. The more you build, the more you earn.</p>
+
+      <p><strong>Mainnet Allocation</strong>: 10% of token supply reserved for proven builders, distributed based on ecosystem contribution, not token holdings.</p>
+
+      <p><strong>Revenue Sharing</strong>: TLD auction revenues partially distributed to application developers driving adoption. Build the ecosystem, share the rewards.</p>
+
+      <p><strong>Anti‑Speculation Measures</strong>:</p>
+
+      <ul>
+        <li>TLD owners must demonstrate usage within 1 year or face reclaim</li>
+        <li>Multiple TLD ownership requires proven utilization of existing TLDs</li>
+        <li>Squatting penalties fund builder grants</li>
+      </ul>
+
+      <p>We want builders, not holders. Users, not speculators. Products, not promises.</p>
     </section>
 
-    <section id="applications">
-      <h2>6. Applications and Use Cases</h2>
-      <h3>6.1 Decentralized Services</h3>
+    <section id="auction">
+      <h2>6. TLD Auction System</h2>
+      <h3>6.1 Designed for Use, Not Speculation</h3>
 
-      <ol>
-        <li>Domain Registrars
-          <pre class="dedent"><code class="language-typescript">
-class ModernRegistrar {
-  async registerName(name: string) {
-    // Check phase eligibility
-    const phase = await network.getCurrentPhase();
+      <p>Dap’s auction system prioritizes utilization:</p>
 
-    if (!phase.isEligible(name))
-      throw new Error("Name not available in current phase");
+      <p><strong>Open Auction Format</strong>: Simple eBay‑style bidding everyone understands. No Vickrey auction complexity that confuses users and enables gaming.</p>
 
-    // Place deposit
-    const deposit = await this.calculateDeposit(name);
-    await this.submitDeposit(name, deposit);
+      <p><strong>Progressive Minimums</strong>:</p>
 
-    // Monitor claim window
-    return await this.monitorRegistration(name);
-  }
-}
-          </code></pre>
-        </li>
+      <ul>
+        <li>Single‑letter TLDs: 10M GRP minimum</li>
+        <li>Two‑letter TLDs: 1M GRP minimum</li>
+        <li>Three‑letter TLDs: 100K GRP minimum</li>
+        <li>Longer TLDs: 10K GRP minimum</li>
+      </ul>
 
-        <li>DNS Providers
-          <pre class="dedent"><code class="language-typescript">
-class DNSProvider {
-  // High‑availability DNS serving
-  async serveRecords(name: string) {
-    // Fetch and verify records
-    const records = await this.getVerifiedRecords(name);
+      <p><strong>Build Requirements</strong>: TLD winners must:</p>
 
-    // Distribute to edge locations
-    await this.distributeRecords(records);
+      <ul>
+        <li>Set nameservers within 30 days</li>
+        <li>Demonstrate registration system within 90 days</li>
+        <li>Show active usage within 1 year</li>
+        <li>Or face automatic reclaim and re‑auction</li>
+      </ul>
 
-    // Monitor and earn rewards
-    this.startMetricsCollection();
-  }
-}
-          </code></pre>
-        </li>
-      </ol>
+      <p><strong>Builder Advantages</strong>:</p>
 
-      <h3>6.2 Integration Examples</h3>
+      <ul>
+        <li>Proven developers get 20% auction discount</li>
+        <li>Ecosystem contributors get priority access</li>
+        <li>Multiple TLD bids require utilization proof</li>
+      </ul>
 
-      <ol>
-        <li>Web Hosting
-          <pre class="dedent"><code class="language-typescript">
-class HostingPlatform {
-  async deployWebsite(name: string, content: Site) {
-    // Configure DNS
-    await this.configureDNS(name);
+      <h3>6.2 Registry Flexibility</h3>
 
-    // Deploy content
-    await this.deployContent(content);
+      <p>TLD owners have complete control over their namespace:</p>
 
-    // Setup monitoring
-    await this.setupMonitoring(name);
-  }
-}
-          </code></pre>
-        </li>
+      <p><strong>Business Models</strong>:</p>
 
-        <li>Identity Services
-          <pre class="dedent"><code class="language-typescript">
-class IdentityProvider {
-  async verifyDomainOwnership(name: string) {
-    // Verify on‑chain ownership
-    const owner = await network.verifyOwner(name);
+      <ul>
+        <li>Traditional: Charge registration fees</li>
+        <li>Free: Build ecosystem through free domains</li>
+        <li>Token‑Gated: Require NFT/token ownership</li>
+        <li>Verified: KYC/identity requirements</li>
+        <li>Custom: Any model you can imagine</li>
+      </ul>
 
-    // Check DNS control
-    await this.verifyDNSControl(name, owner);
+      <p><strong>Technical Freedom</strong>:</p>
 
-    // Issue credentials
-    return this.issueCredentials(name, owner);
-  }
-}
-          </code></pre>
-        </li>
-      </ol>
+      <ul>
+        <li>Choose any registry software</li>
+        <li>Set any DNS records</li>
+        <li>Implement any policies</li>
+        <li>Run any infrastructure</li>
+      </ul>
+
+      <p><strong>The Key Insight</strong>: "Own the whole .COM, not just a domain." Instead of registering mycompany.com, own .mycompany and control unlimited domains beneath it.</p>
     </section>
 
-    <section id="future">
-      <h2>7. Future Development</h2>
-      <h3>7.1 Technical Roadmap</h3>
+    <section id="governance">
+      <h2>7. Governance: Efficient, Not Perfect</h2>
+      <h3>7.1 Benevolent Dictatorship Phase</h3>
+
+      <p>For the first two years, the Dap Foundation makes decisions quickly:</p>
+
+      <ul>
+        <li>Protocol upgrades decided in days, not months</li>
+        <li>Resource allocation without committees</li>
+        <li>Partnership negotiations without votes</li>
+        <li>Emergency responses without delays</li>
+      </ul>
+
+      <p>This is explicitly temporary. We need to achieve product‑market fit before decentralizing governance. Handshake proved that premature decentralization equals permanent paralysis.</p>
+
+      <h3>7.2 Practical Decentralization</h3>
+
+      <p>After two years, we transition to community governance with pragmatic constraints:</p>
+
+      <p><strong>Bounded Decisions</strong>: Governance for major changes (protocol upgrades, economic parameters). Daily operations remain centralized for efficiency.</p>
+
+      <p><strong>Time Limits</strong>: All proposals have 30‑day maximum discussion periods. Decisions happen, even if imperfect.</p>
+
+      <p><strong>Implementation Focus</strong>: Proposals must include implementation plans, not just ideas. "Who will build this?" comes before "Should we build this?"</p>
+
+      <p><strong>Default to Action</strong>: Without clear consensus against, we proceed. Inaction is not an option.</p>
+
+      <h3>7.3 Success Metrics That Matter</h3>
+
+      <p>We measure governance success by outcomes, not process:</p>
+
+      <ul>
+        <li>Products shipped per quarter</li>
+        <li>New developers onboarded</li>
+        <li>User growth rate</li>
+        <li>Revenue generated</li>
+        <li>DNS queries served</li>
+      </ul>
+
+      <p>Not:</p>
+
+      <ul>
+        <li>Governance participation rate</li>
+        <li>Decentralization coefficient</li>
+        <li>Token distribution metrics</li>
+        <li>Ideological purity scores</li>
+      </ul>
+
+      <p>Results matter. Process doesn’t.</p>
+    </section>
+
+    <section id="testnet">
+      <h2>8. Extended Testnet: Building, Not Testing</h2>
+      <h3>8.1 12‑Month Minimum</h3>
+
+      <p>Handshake’s 2‑month testnet was barely enough to test the protocol. It provided zero time for ecosystem development. We do the opposite:</p>
+
+      <ul>
+        <li><strong>Months 1‑2</strong>: Protocol testing and stabilization</li>
+        <li><strong>Months 3‑8</strong>: Developer onboarding and building</li>
+        <li><strong>Months 9‑12</strong>: User acquisition and product refinement</li>
+        <li><strong>Month 12+</strong>: Mainnet launch only after ecosystem exists</li>
+      </ul>
+
+      <p>This isn’t about perfecting the protocol—it’s about building the ecosystem. The protocol is useless without applications.</p>
+
+      <h3>8.2 Testnet Incentives</h3>
+
+      <p>We pay people to build during testnet:</p>
+
+      <ul>
+        <li><strong>Developer Grants</strong>: $100K‑$1M for serious applications</li>
+        <li><strong>Bug Bounties</strong>: Up to $100K for critical issues</li>
+        <li><strong>User Rewards</strong>: Token airdrops for active testnet users</li>
+        <li><strong>Partnership Incentives</strong>: Revenue guarantees for early adopters</li>
+      </ul>
+
+      <p>Yes, this costs money. Yes, it’s somewhat centralized. It’s how successful ecosystems bootstrap. Organic growth is a luxury for established networks.</p>
+
+      <h3>8.3 Launch Criteria</h3>
+
+      <p>We don’t launch mainnet until:</p>
+
+      <ul>
+        <li>✅ 10+ production‑ready applications</li>
+        <li>✅ 1,000+ active developers</li>
+        <li>✅ 10,000+ daily users</li>
+        <li>✅ 100K+ daily DNS queries</li>
+        <li>✅ 5+ registry implementations</li>
+        <li>✅ 3+ browser integrations</li>
+        <li>✅ Proven business models</li>
+      </ul>
+
+      <p>No arbitrary dates. No pressure from token holders. Launch when ready, not when scheduled.</p>
+    </section>
+
+    <section id="business">
+      <h2>9. ICANN Cooperation, Not Competition</h2>
+      <h3>9.1 Pragmatic Coexistence</h3>
+
+      <p>We don’t fight ICANN—we complement them:</p>
+
+      <p><strong>Reserved Namespace</strong>: All existing ICANN TLDs are reserved in Dap. No conflicts, no confusion, no competition for existing namespaces.</p>
+
+      <p><strong>Partnership Path</strong>: ICANN registry operators can claim their TLDs on Dap, enabling:</p>
+
+      <ul>
+        <li>Parallel operation on both systems</li>
+        <li>Enhanced functionality through blockchain</li>
+        <li>New revenue opportunities</li>
+        <li>Future‑proofing their infrastructure</li>
+      </ul>
+
+      <p><strong>Bridge Solutions</strong>: We actively develop and support:</p>
+
+      <ul>
+        <li>DNS resolvers that check both systems</li>
+        <li>Migration tools for existing domains</li>
+        <li>Hybrid solutions for gradual adoption</li>
+        <li>Compatibility layers for legacy systems</li>
+      </ul>
+
+      <h3>9.2 Business Development</h3>
+
+      <p>We pursue partnerships aggressively:</p>
+
+      <p><strong>Registry Outreach</strong>: Direct engagement with major registry operators about Dap integration opportunities.</p>
+
+      <p><strong>Browser Integration</strong>: Negotiations with Chrome, Firefox, Safari, and Edge for native support. If that doesn’t work, we’ll settle for browser extensions while building our own browser.</p>
+
+      <p><strong>Enterprise Solutions</strong>: B2B offerings for companies wanting blockchain domains without complexity.</p>
+
+      <p><strong>Government Relations</strong>: Proactive engagement with regulators to ensure compliance and legitimacy.</p>
+
+      <p>We don’t wait for the world to discover us—we go to them.</p>
+    </section>
+
+    <section id="business">
+      <h2>10. The Anti‑Maximalist Manifesto</h2>
+      <h3>10.1 What We’re NOT</h3>
+
+      <ul>
+        <li><strong>Not trying to destroy ICANN</strong>: We coexist and complement</li>
+        <li><strong>Not purely decentralized</strong>: We coordinate when necessary</li>
+        <li><strong>Not waiting for perfection</strong>: We ship when good enough</li>
+        <li><strong>Not hostile to business</strong>: We embrace commercial success</li>
+        <li><strong>Not ideologically driven</strong>: We’re results driven</li>
+        <li><strong>Not building for cypherpunks</strong>: We’re building for everyone</li>
+      </ul>
+
+      <h3>10.2 What We ARE</h3>
+
+      <ul>
+        <li><strong>Building products</strong>: Code running in production</li>
+        <li><strong>Shipping working code</strong>: Weekly releases, not yearly promises</li>
+        <li><strong>Growing an ecosystem</strong>: Active developer relations and support</li>
+        <li><strong>Creating utility</strong>: Solving real problems for real users</li>
+        <li><strong>Embracing pragmatism</strong>: The best solution that actually ships</li>
+        <li><strong>Measuring success</strong>: By usage, not ideology</li>
+      </ul>
+
+      <h3>10.3 Our Metrics</h3>
+
+      <p><strong>What We Track</strong>:</p>
+
+      <ul>
+        <li>GitHub commits per week</li>
+        <li>New applications launched</li>
+        <li>Active users (daily/monthly)</li>
+        <li>DNS queries served</li>
+        <li>Revenue generated</li>
+        <li>Developer satisfaction</li>
+      </ul>
+
+      <p><strong>What We Don’t Track</strong>:</p>
+
+      <ul>
+        <li>Governance participation</li>
+        <li>Decentralization scores</li>
+        <li>Token price</li>
+        <li>Ideological purity</li>
+        <li>Community sentiment</li>
+        <li>Social media followers</li>
+      </ul>
+
+      <p>Build. Ship. Iterate. Everything else is noise.</p>
+    </section>
+
+    <section id="success">
+      <h2>11. Why Dap Will Succeed Where Handshake Failed</h2>
+      <h3>11.1 Leadership Exists</h3>
+
+      <p>Unlike Handshake’s headless approach, Dap has clear leadership:
+
+      <p><strong>Technical Direction</strong>: Core team makes architectural decisions quickly and decisively. No endless bikeshedding over minor details.</p>
+
+      <p><strong>Ecosystem Coordination</strong>: Dedicated team manages developer relations, partnerships, and user growth. Not left to chance.</p>
+
+      <p><strong>Conflict Resolution</strong>: Disputes resolved quickly by designated authorities, not endless community debates.</p>
+
+      <p><strong>Accountability</strong>: Leaders are known, reachable, and accountable for results. No hiding behind "decentralization."</p>
+
+      <p>Leadership isn’t permanent, but it’s necessary for bootstrapping.</p>
+
+      <h3>11.2 Builders First</h3>
+
+      <p>Every decision filtered through one question: "Does this help builders?"</p>
+
+      <p>**Developer Experience**:</p>
+
+      <ul>
+        <li>Modern GraphQL APIs</li>
+        <li>TypeScript‑first SDKs</li>
+        <li>Comprehensive documentation</li>
+        <li>Responsive support</li>
+        <li>Regular workshops</li>
+      </ul>
+
+      <p><strong>Economic Incentives</strong>:</p>
+
+      <ul>
+        <li>Grants for building</li>
+        <li>Revenue sharing</li>
+        <li>Token rewards</li>
+        <li>Priority TLD access</li>
+        <li>Marketing support</li>
+      </ul>
+
+      <p><strong>Cultural Priority</strong>:</p>
+
+      <ul>
+        <li>Builders celebrated over holders</li>
+        <li>Products showcased over price</li>
+        <li>Usage metrics over market cap</li>
+        <li>Shipping velocity over governance participation</li>
+      </ul>
+
+      <p>We optimize for people who build things users want.</p>
+
+      <h3>11.3 Pragmatic Decentralization</h3>
+
+      <p>We decentralize strategically, not dogmatically:</p>
+
+      <p><strong>Progressive Decentralization</strong>:</p>
 
       <ol>
-        <li>Phase 1: Foundation (0‑6 months)
-          <ul>
-            <li>Core protocol implementation</li>
-            <li>Basic tooling</li>
-            <li>Initial network bootstrap</li>
-          </ul>
-        </li>
-
-        <li>Phase 2: Integration (6‑12 months)
-          <ul>
-            <li>Browser integration</li>
-            <li>Mobile support</li>
-            <li>API development</li>
-            <li>Business tools</li>
-          </ul>
-        </li>
-
-        <li>Phase 3: Scaling (12‑24 months)
-          <ul>
-            <li>Performance optimizations</li>
-            <li>Advanced features</li>
-            <li>Enterprise solutions</li>
-            <li>Cross‑chain integration</li>
-          </ul>
-        </li>
+        <li>Years 0‑2: Centralized bootstrap</li>
+        <li>Years 2‑5: Hybrid governance</li>
+        <li>Years 5+: Full decentralization</li>
       </ol>
 
-      <h3>7.2 Community Development</h3>
+      <p><strong>Practical Trade‑offs</strong>:</p>
 
-      <ol>
-        <li>Development Support
-          <ul>
-            <li>Grant programs</li>
-            <li>Developer documentation</li>
-            <li>Integration guides</li>
-            <li>Reference implementations</li>
-          </ul>
-        </li>
+      <ul>
+        <li>Accept: Foundation funding for growth</li>
+        <li>Accept: Corporate partnerships for adoption</li>
+        <li>Accept: Marketing for awareness</li>
+        <li>Accept: Leadership for direction</li>
+        <li>Reject: Capture by single entity</li>
+        <li>Reject: Censorship of domains</li>
+        <li>Reject: Permissioned participation</li>
+        <li>Reject: Forever centralization</li>
+      </ul>
 
-        <li>Infrastructure Growth
-          <ul>
-            <li>Operator incentives</li>
-            <li>Geographic expansion</li>
-            <li>Performance improvements</li>
-            <li>Tooling development</li>
-          </ul>
-        </li>
-      </ol>
+      <p><strong>Success Enables Decentralization</strong>: We can only decentralize what exists. Build first, decentralize second.</p>
+    </section>
+
+    <section id="action">
+      <h2>12. Call to Action</h2>
+      <h3>12.1 For Builders</h3>
+
+      <p>Join us if you want to:</p>
+
+      <ul>
+        <li>Build products people want to use</li>
+        <li>Receive grants and support</li>
+        <li>Shape a growing ecosystem</li>
+        <li>Get priority TLD access</li>
+        <li>Work with pragmatic teammates</li>
+      </ul>
+
+      <p>Don’t join if you want to:</p>
+
+      <ul>
+        <li>Debate governance endlessly</li>
+        <li>Prioritize ideology over shipping</li>
+        <li>Wait for perfect decentralization</li>
+        <li>Build without users</li>
+        <li>Speculate without creating</li>
+      </ul>
+
+      <h3>12.2 For Users</h3>
+
+      <p>We need users who:</p>
+
+      <ul>
+        <li>Use applications daily</li>
+        <li>Provide feedback actively</li>
+        <li>Report bugs honestly</li>
+        <li>Recommend to friends</li>
+        <li>Judge by utility</li>
+      </ul>
+
+      <p>Not users who:</p>
+
+      <ul>
+        <li>Hold tokens passively</li>
+        <li>Complain without contributing</li>
+        <li>Demand perfection immediately</li>
+        <li>Confuse potential with achievement</li>
+        <li>Value ideology over functionality</li>
+      </ul>
+
+      <h3>For Handshake Refugees</h3>
+
+      <p>We understand your frustration. You joined Handshake to build the future but found debates and dysfunction.</p>
+
+      <p>Dap offers:</p>
+
+      <ul>
+        <li>The building environment Handshake promised</li>
+        <li>Support Handshake never provided</li>
+        <li>Users Handshake never attracted</li>
+        <li>Leadership Handshake rejected</li>
+        <li>Pragmatism Handshake feared</li>
+      </ul>
+
+      <p>Bring your experience, leave the maximalism. Help us build what Handshake could have been.</p>
     </section>
 
     <section id="conclusion">
-      <h2>8. Conclusion</h2>
+      <h2>13. Conclusion</h2>
 
-      <p>Dap builds upon Handshake's foundation to create a more accessible and practical decentralized naming system. By focusing on real‑world usability while maintaining strong security principles, Dap aims to accelerate the adoption of decentralized internet naming.</p>
+      <p>Handshake proved that decentralized naming is technically possible; it proved that technical possibility alone is worthless without products, users, and utility.</p>
 
-      <p>The key improvements include:</p>
+      <p>Dap learns from both Handshake’s innovations and its failures. We keep the revolutionary technology while discarding the maximalist ideology that prevented its adoption. We choose pragmatism over purity, building over debating, and shipping over philosophizing.</p>
+
+      <p>The best naming system isn’t the most decentralized—it’s the one people use. The most successful blockchain isn’t the most ideologically pure—it’s the one that solves real problems for real people.</p>
+
+      <p>Perfect decentralization without adoption is an expensive science experiment. Good‑enough decentralization with millions of users changes the world.</p>
+
+      <p>We choose to change the world.</p>
+
+      <p>Join us in building the naming system the internet deserves—not perfect, but shipped; not pure, but useful; not ideological, but practical.</p>
+
+      <p><strong>The best time to plant a tree was 20 years ago. The second best time is now.</strong></p>
+
+      <p><strong>The best naming system is the one that exists.</strong></p>
+
+      <p><strong>Let’s build.</strong></p>
+    </section>
+
+    <hr/>
+
+    <section id="appendices">
+      <h2>Appendices</h2>
+      <h3>Appendix A: Handshake Post‑Mortem</h3>
+
+      <p><strong>What Went Right</strong>:</p>
 
       <ul>
-        <li>Simplified yet protective registration system</li>
-        <li>RandomX mining for better decentralization</li>
-        <li>Sustainable funding for development and operations</li>
-        <li>Improved DNS integration</li>
-        <li>Focus on utility over speculation</li>
+        <li>Proved blockchain‑based naming possible</li>
+        <li>Demonstrated UTXO covenants for domains</li>
+        <li>Created initial developer interest</li>
+        <li>Raised awareness of ICANN alternatives</li>
       </ul>
 
-      <p>Through these improvements, Dap provides a foundation for a more open, secure, and user‑controlled internet naming system.</p>
-    </section>
+      <p><strong>What Went Wrong</strong>:</p>
 
-    <section id="appendix">
-      <h1>Appendices</h1>
-    </section>
+      <ul>
+        <li>No ecosystem coordination or support</li>
+        <li>Maximalist culture rejected pragmatism</li>
+        <li>Zero focus on user experience</li>
+        <li>No product development incentives</li>
+        <li>Community paralysis from governance debates</li>
+        <li>Technical superiority complex prevented iteration</li>
+        <li>Builders abandoned for lack of support</li>
+      </ul>
 
-    <section id="appendix-a">
-      <h2>Appendix A: Technical Specifications</h2>
+      <p><strong>Key Lesson</strong>: Technology enables possibilities; coordination creates realities.</p>
 
-      <h3>A.1 Protocol Constants</h3>
+      <h3>Appendix B: Pragmatic Trade‑offs</h3>
 
-      <pre class="dedent-level-1"><code class="language-typescript">
-const PROTOCOL_CONSTANTS = {
-  // Block parameters
-  BLOCK_TIME: 600,             // 10 minutes
-  DIFFICULTY_ADJUSTMENT: 2016, // ~2 weeks
-  MAX_BLOCK_SIZE: 4_000_000,   // 4MB
+      <p>What Centralization We Accept:</p>
 
-  // RandomX parameters
-  MEMORY_SIZE: 2 * 1024 * 1024 * 1024, // 2GB
-  PROGRAM_ITERATIONS: 1024,
-  PROGRAM_SIZE: 256,
-  SCRATCHPAD_SIZE: 2 * 1024 * 1024,    // 2MB
-
-  // Network parameters
-  DEFAULT_PORT: 12035,
-  MAX_PEERS: 128,
-  PROTOCOL_VERSION: 1,
-
-  // Name system parameters
-  CLAIM_WINDOW: 604800,  // 7 days in seconds
-  EXTENSION_TIME: 86400, // 1 day in seconds
-  MAX_NAME_LENGTH: 63,   // DNS standard
-  MIN_NAME_LENGTH: 1,
-  WAIT_PERIOD: 1209600   // 14 days in seconds
-};
+      <pre class="dedent"><code class="language-markdown">
+| Component           | Centralization        | Duration | Justification       |
+|---------------------|-----------------------|----------|---------------------|
+| Development Fund    | Foundation controlled | 5 years  | Bootstrap ecosystem |
+| Technical Decisions | Core team             | 2 years  | Ship quickly        |
+| Marketing           | Dedicated team        | Ongoing  | Drive adoption      |
+| Partnerships        | Business development  | Ongoing  | Enterprise adoption |
+| Documentation       | Technical writers     | Ongoing  | Developer success   |
       </code></pre>
 
-      <h3>A.2 Data Structures</h3>
+      <p>Sunset Provisions:</p>
 
-      <ol>
-        <li>Blocks
-          <pre class="dedent"><code class="language-typescript">
-interface Block {
-  header: {
-    bits: number,
-    merkleRoot: Hash,
-    nonce: number,
-    prevBlock: Hash,
-    time: number,
-    version: number
-  },
-  nameOperations: NameOp[],
-  transactions: Transaction[]
-}
-          </code></pre>
-        </li>
+      <ul>
+        <li>Foundation voting power decreases 20% yearly</li>
+        <li>Development fund transitions to DAO control</li>
+        <li>Technical decisions shift to governance</li>
+        <li>All special powers expire by year 5</li>
+      </ul>
 
-        <li>Name Records
-          <pre class="dedent"><code class="language-typescript">
-interface NameRecord {
-  expires: number,
-  name: string,
-  owner: PublicKey,
-  records: {
-    dns: DNSRecord[],
-    dnssec: DNSSECConfig,
-    metadata: Map&lt;string, string>
-  },
-  registered: number,
-  status: "Active" | "InAuction" | "InClaimWindow" | "InWaitPeriod"
-}
-          </code></pre>
-        </li>
-      </ol>
+      <h3>Appendix C: Success Stories We Want</h3>
 
-      <h3>A.3 Network Protocol</h3>
+      <p><strong>Year 1</strong>: "Startup Raises $5M Using .startup TLD"</p>
 
-      <ol>
-        <li>Message Types
-          <pre class="dedent"><code class="language-typescript">
-enum MessageType {
-  ALERT = 11,    // Network alerts
-  BLOCKS = 4,    // Block data
-  GETBLOCKS = 3, // Request block headers
-  GETDATA = 8,   // Request specific data
-  GETNAMES = 5,  // Request name data
-  INV = 7,       // Inventory announcement
-  MEMPOOL = 9,   // Request mempool contents
-  NAMES = 6,     // Name data
-  TX = 10,       // Transaction data
-  VERACK = 2,    // Version acknowledgment
-  VERSION = 1    // Protocol version exchange
-}
-          </code></pre>
-        </li>
+      <ul>
+        <li>Company uses .startup domain for all properties</li>
+        <li>Investors see innovation mindset</li>
+        <li>Media coverage drives Dap awareness</li>
+      </ul>
 
-        <li>Consensus Rules
-          <pre class="dedent"><code class="language-typescript">
-interface ConsensusRules {
-  // Block validation
-  block: {
-    // Must build on heaviest chain
-    chainWeight: "cumulative-work",
-    // Difficulty adjusts every 2016 blocks
-    difficultyAdjustment: 2016,
-    // Maximum size including all data
-    maxSize: 4_000_000,
-    // Must maintain 10‑minute average spacing
-    spacing: 600
-  },
-  // Name operations
-  names: {
-    // Cannot front‑run auctions
-    auctionRules: true,
-    // Only one active claim window per name
-    uniqueClaims: true,
-    // Must complete wait period
-    waitPeriod: true
-  }
-}
-          </code></pre>
-        </li>
-      </ol>
+      <p><strong>Year 2</strong>: "Fortune 500 Migrates to .brand TLD"</p>
+
+      <ul>
+        <li>Major corporation adopts Dap for brand protection</li>
+        <li>Demonstrates enterprise viability</li>
+        <li>Drives institutional adoption</li>
+      </ul>
+
+      <p><strong>Year 3</strong>: "Developer Earns $1M from Domain App"</p>
+
+      <ul>
+        <li>Individual developer builds successful service</li>
+        <li>Proves ecosystem economic opportunity</li>
+        <li>Attracts more builders</li>
+      </ul>
+
+      <p><strong>Year 5</strong>: "Dap Serves 1 Billion DNS Queries Daily"</p>
+
+      <ul>
+        <li>Achieving scale comparable to major DNS providers</li>
+        <li>Real utility at global scale</li>
+        <li>Undeniable product‑market fit</li>
+      </ul>
+
+      <h3>Appendix D: The Anti‑Patterns We Avoid</h3>
+
+      <p><strong>Governance Paralysis</strong>: Handshake spent months debating minor parameter changes while shipping nothing. We decide in days and iterate.</p>
+
+      <p><strong>Purity Spirals</strong>: Handshake community attacked any pragmatism as betrayal. We celebrate what works.</p>
+
+      <p><strong>Technical Superiority Without Usage</strong>: Handshake built "the best" system nobody uses. We build good‑enough systems millions use.</p>
+
+      <p><strong>Community Gatekeeping</strong>: Handshake’s toxic maximalism drove away builders. We welcome anyone who ships.</p>
+
+      <p><strong>Speculation Over Utility</strong>: Handshake optimized for token price over product development. We optimize for usage metrics.</p>
+
+      <p><strong>Documentation Negligence</strong>: Handshake never properly documented APIs or tools. We maintain comprehensive, updated documentation.</p>
+
+      <p><strong>User Hostility</strong>: Handshake expected users to understand blockchain complexity. We hide complexity behind simple interfaces.</p>
     </section>
 
-    <section id="appendix-b">
-      <h2>Appendix B: API Reference<h2>
-      <h3>B.1 Node API</h3>
+    <hr/>
 
-      <ol>
-        <li>Name Operations
-          <pre class="dedent"><code class="language-typescript">
-class NameAPI {
-  // Query operations
-  async lookup(name: string): Promise&lt;NameRecord> {
-    // Verify name format
-    this.validateName(name);
-
-    // Check local state first
-    const local = await this.state.lookup(name);
-
-    if (local)
-      return local;
-
-    // Query network if not found locally
-    return await this.network.lookup(name);
-  }
-
-  async checkAvailability(name: string): Promise<{
-    available: boolean,
-    earliestAvailable: number,
-    phase: Phase
-  }> {
-    // Check current registration phase
-    const phase = await this.getCurrentPhase();
-
-    // Verify name eligibility
-    return this.checkEligibility(name, phase);
-  }
-
-  async register(name: string, options: {
-    deposit: Amount,
-    owner: PublicKey,
-    records?: DNSRecord[]
-  }): Promise<Result> {
-    // Validate registration request
-    await this.validateRegistration(name, options);
-
-    // Submit deposit
-    const deposit = await this.submitDeposit(options.deposit);
-
-    // Enter claim window
-    return await this.enterClaimWindow(name, deposit);
-  }
-}
-          </code></pre>
-        </li>
-
-        <li>Network Operations
-          <pre class="dedent"><code class="language-typescript">
-class NetworkAPI {
-  async broadcast(tx: Transaction): Promise&lt;string> {
-    // Validate transaction
-    await this.validateTransaction(tx);
-
-    // Get connected peers
-    const peers = await this.getPeers();
-
-    // Broadcast to all peers
-    return await this.broadcastToPeers(peers, tx);
-  }
-
-  // Peer management
-  async connect(peer: string): Promise&lt;boolean> {
-    // Validate peer address
-    this.validatePeer(peer);
-
-    // Establish connection
-    const connection = await this.createConnection(peer);
-
-    // Handshake
-    return await this.performHandshake(connection);
-  }
-}
-          </code></pre>
-        </li>
-      </ol>
-    </section>
-
-    <section id="appendix-c">
-      <h2>Appendix C: Implementation Guide</h2>
-      <h3>C.1 Setting Up a Node</h3>
-
-      <ol>
-        <li>Basic Installation
-          <pre class="dedent"><code class="language-shell">
-# Install dependencies
-apt-get update
-apt-get install -y \
-  build-essential \
-  cmake \
-  libssl-dev \
-  git
-
-# Clone repository
-git clone https://github.com/[project]/[name]
-cd [name]
-
-# Build
-mkdir build
-cd build
-cmake ..
-make
-          </code></pre>
-        </li>
-
-        <li>Configuration
-          <pre class="dedent"><code class="language-yaml">
-# config.yaml
-dns:
-  port: 53
-  recursive: false
-  serve: true
-
-mempool:
-  maxmemory: "2GB" # Maximum memory usage
-  maxsize: 300000  # Maximum transaction count
-
-mining:
-  enabled: true
-  threads: 4       # Number of mining threads
-
-network:
-  maxpeers: 50
-  port: 12035
-
-node:
-  datadir: "/data"
-  type: "full"     # full, light, or dns-only
-          </code></pre>
-        </li>
-      </ol>
-
-      <h3>C.2 Running a Registrar Service</h3>
-
-      <pre class="dedent-level-1"><code class="language-typescript">
-class Registrar {
-  constructor(config: Config) {
-    this.node = new Node(config);
-    this.db = new Database(config.database);
-    this.monitoring = new Monitoring();
-  }
-
-  async handleRegistration(request: RegRequest) {
-    // Verify phase eligibility
-    const phase = await this.node.getCurrentPhase();
-
-    if (!phase.isEligible(request.name))
-      throw new Error("Name not available in current phase");
-
-    // Calculate deposit
-    const deposit = this.calculateDeposit(request.name);
-
-    // Process deposit
-    const receipt = await this.processDeposit(request.payment);
-
-    // Enter claim window
-    const claim = await this.node.enterClaimWindow(request.name, {
-      deposit: deposit,
-      owner: request.owner
-    });
-
-    // Monitor status
-    this.monitorClaim(claim);
-
-    return claim;
-  }
-
-  async start() {
-    // Initialize services
-    await this.node.connect();
-    await this.setupAPI();
-    await this.startMonitoring();
-
-    // Start processing registrations
-    this.processQueue();
-  }
-}
-      </code></pre>
-    </section>
-
-    <section id="appendix-d">
-      <h2>Appendix D: Economic Analysis</h2>
-      <h3>D.1 Network Costs</h3>
-
-      <ol>
-        <li>Infrastructure Requirements
-          <pre class="dedent"><code class="language-typescript">
-const operationalCosts = {
-  // Operating costs (monthly)
-  costs: {
-    bandwidth: "$30-50",
-    electricity: "$20-40",
-    infrastructure: "$50-100"
-  },
-  // Hardware requirements
-  hardware: {
-    bandwidth: "100Mbps+",
-    cpu: "4+ cores",
-    memory: "8GB minimum",
-    storage: "100GB+ SSD"
-  }
-};
-          </code></pre>
-        </li>
-
-        <li>Fee Distribution Model
-          <pre class="dedent"><code class="language-typescript">
-const feeAllocation = {
-  // Community allocation (20%)
-  community: {
-    education: "5%",  // Documentation/training
-    grants: "10%",    // Developer grants
-    outreach: "5%"    // Community building
-  },
-  // Development allocation (40%)
-  development: {
-    core: "15%",      // Core protocol
-    research: "5%",   // Research/innovation
-    security: "10%",  // Security/audits
-    tools: "10%"      // Developer tools
-  },
-  // Operations allocation (30%)
-  operations: {
-    dns: "15%",       // DNS infrastructure
-    monitoring: "5%", // System monitoring
-    network: "10%"    // Network operations
-  },
-  // Reserve allocation (10%)
-  reserve: {
-    emergency: "5%",  // Emergency fund
-    future: "5%"      // Future development
-  }
-};
-          </code></pre>
-        </li>
-      </ol>
-
-      <h3>D.2 Market Analysis</h3>
-
-      <ol>
-        <li>Target Segments
-          <pre class="dedent"><code class="language-typescript">
-const marketSegments = {
-  developers: {
-    avgNames: 3.2,
-    percentage: "5%",
-    useCase: "Development/testing"
-  },
-  enterprise: {
-    avgNames: 5.7,
-    percentage: "20%",
-    useCase: "Corporate infrastructure"
-  },
-  individuals: {
-    avgNames: 1.5,
-    percentage: "40%",
-    useCase: "Personal domains, projects"
-  },
-  smallBusiness: {
-    avgNames: 2.3,
-    percentage: "35%",
-    useCase: "Business presence"
-  }
-};
-          </code></pre>
-        </li>
-
-        <li>Growth Projections
-          <pre class="dedent"><code class="language-typescript">
-const projections = {
-  year1: {
-    names: 100000,
-    operators: 500,
-    revenue: "$1M equivalent"
-  },
-  year2: {
-    names: 500000,
-    operators: 2000,
-    revenue: "$5M equivalent"
-  },
-  year3: {
-    names: 2000000,
-    operators: 5000,
-    revenue: "$20M equivalent"
-  }
-};
-          </code></pre>
-        </li>
-      </ol>
+    <section id="fin">
+      <p>Dap: Because the best protocol is the one that <em>ships</em>.</p>
+      <p>Join us: <a href="https://dap.sh">https://dap.sh</a></p>
+      <p>Version 4 - Draft</p>
+      <p>Last Updated: 2025.08.21</p>
     </section>
   </body>
 

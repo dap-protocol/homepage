@@ -258,16 +258,16 @@
 
   <body>
     <aside>
-      <p>WARNING: DRAFT 4 — IN‑PROGRESS WHITEPAPER</p>
-      <p>UPDATED: 2025.08.21</p>
+      <p>WARNING: DRAFT 5 — IN‑PROGRESS WHITEPAPER</p>
+      <p>UPDATED: 2025.10.04</p>
     </aside>
 
     <section id="abstract">
       <h1>Abstract</h1>
 
-      <p>The internet’s naming system remains under the centralized control of the Internet Corporation for Assigned Names and Numbers (<a href="https://icann.org?ref=dap.sh" target="_blank">ICANN</a>), requiring million‑dollar fees and bureaucratic approval processes for new top‑level domains. While <a href="https://handshake.org?ref=dap.sh" target="_blank">Handshake</a> attempted to solve this through pure decentralization, it has failed to produce a single notable product or use case in over five years, trapped by its own <a href="https://www.investopedia.com/terms/b/bitcoin-maximalism.asp?ref=dap.sh" target="_blank">Bitcoin maximalist</a> ideology that refuses any coordination even when necessary for basic ecosystem development.</p>
+      <p>The internet’s naming system remains under the centralized control of the Internet Corporation for Assigned Names and Numbers (<a href="https://icann.org?ref=dap.sh" target="_blank">ICANN</a>), requiring million‑dollar fees and bureaucratic approval processes for new top‑level domains. While other blockchain naming systems have attempted to solve this through pure decentralization, they have failed to produce notable products or use cases after years of operation, trapped by ideological purity that refuses any coordination even when necessary for basic ecosystem development.</p>
 
-      <p>Dap represents a pragmatic alternative: decentralized enough to ensure censorship resistance and permissionless innovation, yet coordinated enough to ship products and serve users. We explicitly reject the purity spirals that paralyzed Handshake, choosing instead to measure success by applications built, users served, and real‑world utility created.</p>
+      <p>Dap represents a pragmatic alternative: decentralized enough to ensure censorship resistance and permissionless innovation, yet coordinated enough to ship products and serve users. We explicitly reject the purity spirals that have paralyzed other projects, choosing instead to measure success by applications built, users served, and real‑world utility created.</p>
 
       <p>This paper introduces Dap’s technical architecture, economic model, and our philosophy of pragmatic decentralization that prioritizes shipping over philosophizing. Perfect decentralization without adoption is worthless. Dap chooses adoption.</p>
     </section>
@@ -288,86 +288,108 @@
 
       <p>This system has resulted in ~1,500 TLDs existing after decades of internet growth, with control concentrated among a handful of large registry operators. Innovation is stifled, prices remain high, and entire communities and businesses are excluded from owning their namespace.</p>
 
-      <h3>2.2 Why Handshake Failed to Deliver</h3>
+      <h3>2.2 Why Other Blockchains Failed to Deliver</h3>
 
-      <p>Handshake launched in 2020 with the promise of decentralizing domain names. The technology works—the blockchain runs, names can be registered, <a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System&useskin=vector&ref=dap.sh" target="_blank">DNS</a> records can be set. Yet after five years:</p>
+      <p>Previous blockchain naming systems launched with the promise of decentralizing domain names. The technology works—the blockchain runs, names can be registered, <a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System&useskin=vector&ref=dap.sh" target="_blank">DNS</a> records can be set. Yet after years:</p>
 
       <ul>
-        <li><strong>Zero notable products</strong> have been built on Handshake</li>
-        <li><strong>Zero major websites</strong> use Handshake names</li>
-        <li><strong>Zero services</strong> provide utility to end users</li>
-        <li><strong>The community has abandoned the project</strong></li>
+        <li><strong>Zero notable products</strong> have been built</li>
+        <li><strong>Zero major websites</strong> use their names</li>
+        <li><strong>Zero services</strong> provide utility to end users</li>
+        <li><strong>The communities have largely abandoned these projects</strong></li>
       </ul>
 
       <p>Why? The answer isn’t technical—it’s cultural.</p>
 
-      <p>Handshake’s community inherited Bitcoin maximalism’s most toxic trait: an absolute refusal to coordinate or centralize anything, even temporarily, even when necessary for basic ecosystem development. This manifested as:</p>
+      <p>These communities inherited Bitcoin maximalism’s most toxic trait: an absolute refusal to coordinate or centralize anything, even temporarily, even when necessary for basic ecosystem development. This manifested as:</p>
 
       <p><strong>The Purity Trap</strong>: Any suggestion of coordination, funding, or leadership was attacked as “centralization” and rejected, regardless of practical benefits.</p>
 
-      <p><strong>Technical Superiority Complex</strong>: The community became satisfied with having built “the best decentralized naming system” technically, while ignoring that nobody uses it.</p>
+      <p><strong>Technical Superiority Complex</strong>: Communities became satisfied with having built “the best decentralized naming system” technically, while ignoring that nobody uses it.</p>
 
-      <p><strong>Coordination Failure</strong>: Without any organizing force, developers received no support, users found no applications, and the ecosystem stagnated. The community wouldn’t even coordinate on basic marketing or developer documentation.</p>
+      <p><strong>Governance Paralysis</strong>: Decision‑making processes optimized for “decentralization theater” over actual progress. Months spent debating, zero time shipping.</p>
 
-      <p><strong>Complacency Disease</strong>: The combination of technical pride and ideological purity created a complacent community that confused potential with achievement. “We built it perfectly” became an excuse for never shipping anything people want.</p>
+      <p><strong>User Hostility</strong>: Expecting end users to understand blockchain mechanics, run full nodes, and compile software from source. Then wondering why adoption never came.</p>
 
-      <p>As one developer noted: <em>“There are no products on Handshake. There are no websites on Handshake. There are no services on Handshake. There is little to no community on Handshake…no reason for dedicated builders to stay.”</em></p>
+      <p><strong>The Field of Dreams Fallacy</strong>: “Build the infrastructure and they will come.” No marketing. No business development. No user onboarding. No ecosystem cultivation.</p>
 
-      <h3>2.3 Dap’s Philosophy: Pragmatic Decentralization</h3>
+      <p>Dap explicitly rejects this failed approach. We prioritize pragmatism, product development, and user adoption over ideological purity.</p>
 
-      <p>Dap learns from Handshake’s failure by explicitly choosing pragmatism over purity:</p>
+      <h3>2.3 The Dap Philosophy</h3>
 
-      <p><strong>Ship First, Philosophize Later</strong>: We measure success by working products in users’ hands, not theoretical superiority in whitepapers.</p>
+      <p><strong>Products Over Protocol</strong>: We judge ourselves by applications built and users served, not by technical papers published or governance proposals debated.</p>
 
-      <p><strong>Strategic Coordination</strong>: We accept that initial centralization—for funding, development, and ecosystem building—is not just acceptable but necessary. The alternative is Handshake’s graveyard of potential.</p>
+      <p><strong>Pragmatic Decentralization</strong>: We use centralization as a tool when it accelerates development, with clear sunset provisions to prevent permanent capture.</p>
 
-      <p><strong>Builder‑Centric</strong>: Every decision is evaluated by one question: “Does this help builders ship products?” If yes, we do it, regardless of ideological concerns.</p>
+      <p><strong>User‑First Design</strong>: If your grandmother can’t use it, we haven’t built it right. Complexity belongs in the backend, not the user interface.</p>
 
-      <p><strong>Results Over Ideology</strong>: We judge ourselves by metrics that matter: active users, DNS queries served, revenue generated, and businesses built. Not by decentralization scores or ideological purity.</p>
+      <p><strong>Aggressive Business Development</strong>: We don’t wait for organic adoption. We actively pursue partnerships, integrations, and users.</p>
 
-      <p>We are building the naming system the internet needs, not the one that scores highest on cypherpunk purity tests.</p>
+      <p><strong>Rapid Iteration</strong>: We ship weekly, not yearly. Better to launch and fix than to debate and delay.</p>
     </section>
 
-    <section id="learning">
-      <h2>3. Learning from Handshake’s Mistakes</h2>
-      <h3>3.1 The Maximalist Paralysis</h3>
+    <section id="opportunity">
+      <h2>3. Market Opportunity</h2>
+      <h3>3.1 The Domain Name Industry</h3>
 
-      <p>Bitcoin maximalism served Bitcoin well in its early days, providing ideological cohesion and resistance to corporate capture. But when applied blindly to every blockchain project, it becomes a disease that prevents basic functionality.</p>
-
-      <p>Handshake’s community treated any coordination as betrayal:</p>
+      <p>The domain industry generates over $10 billion annually, with:</p>
 
       <ul>
-        <li>Proposing a development fund was “centralization”</li>
-        <li>Organizing marketing efforts was “centralization”</li>
-        <li>Having technical leadership was “centralization”</li>
-        <li>Even maintaining a roadmap was “centralization”</li>
+        <li>350+ million registered domains</li>
+        <li>Average prices of $10‑50 per year</li>
+        <li>Premium domains selling for millions</li>
+        <li>Entire secondary market of brokers and investors</li>
       </ul>
 
-      <p>The result was complete paralysis. No decisions could be made, no resources could be allocated, no priorities could be set. The project became a perfectly decentralized ghost town—technically operational but useless.</p>
+      <p>Yet innovation has stagnated:</p>
 
-      <h3>3.2 The Builder Exodus</h3>
+      <ul>
+        <li>Same TLD application process since 2012</li>
+        <li>Same registrar/registry split model</li>
+        <li>Same centralized control structure</li>
+        <li>Same barriers to entry</li>
+      </ul>
 
-      <p>Developers initially flocked to Handshake, excited by the technical possibilities. They left just as quickly when they discovered:</p>
+      <h3>3.2 Dap’s Opportunity</h3>
 
-      <p><strong>No Ecosystem Support</strong>: Unlike successful platforms, Handshake offered no grants, no documentation, no developer relations, no technical support. Builders were on their own.</p>
+      <p>Dap targets three distinct markets:</p>
 
-      <p><strong>No Clear Direction</strong>: Without leadership or roadmap, developers didn’t know what to build. Should they focus on browsers? Wallets? Applications? Nobody knew, and nobody could decide.</p>
+      <p><strong>TLD Ownership</strong>: Instead of paying ICANN $185,000+ and waiting years, own a TLD on Dap immediately through transparent auctions.</p>
 
-      <p><strong>Hostile Community</strong>: Practical suggestions were met with ideological lectures. Requests for coordination were treated as attacks on decentralization. Builders who wanted to ship products were told to “read the whitepaper.”</p>
+      <p><strong>Brand Protection</strong>: Companies can own their .brand TLD forever, controlling their entire namespace without annual ICANN fees.</p>
 
-      <p><strong>No Users</strong>: Even builders who persevered found no users for their applications. The community was more interested in holding tokens than using products.</p>
+      <p><strong>Developer Innovation</strong>: Build applications impossible under ICANN’s restrictions—token‑gated domains, NFT integration, automated markets.</p>
 
-      <p>The builders left for ecosystems that wanted them to succeed.</p>
+      <h3>3.3 Go‑to‑Market Strategy</h3>
 
-      <h3>3.3 Dap’s Approach</h3>
+      <p>Unlike projects that wait for users to discover them, Dap actively creates adoption:</p>
 
-      <p>Dap explicitly rejects Handshake’s failed approach:</p>
+      <p><strong>Phase 1: Builders (Months 0‑6)</strong></p>
 
-      <p><strong>Ecosystem Fund</strong>: Yes, we have a centralized fund for developer grants, managed by a foundation. This is “centralization.” It’s how successful ecosystems bootstrap. We’ll decentralize it over time, after we have an ecosystem worth decentralizing.</p>
+      <ul>
+        <li>Developer grants program ($10M allocated)</li>
+        <li>Weekly hackathons and demo days</li>
+        <li>Technical documentation and SDKs</li>
+        <li>Direct outreach to Web3 projects</li>
+      </ul>
 
-      <p><strong>Developer Relations Team</strong>: We employ people whose job is helping developers succeed. They write documentation, answer questions, review code, and provide support. Another “centralization” that helps people build.</p>
+      <p><strong>Phase 2: Businesses (Months 6‑12)</strong></p>
 
-      <p><strong>Product‑First Mentality</strong>: Our internal mantra is “What shipped this week?” Not “How decentralized are we?” or “What does the whitepaper say?” but “What can users do today they couldn’t do yesterday?”</p>
+      <ul>
+        <li>Enterprise sales team targeting Fortune 500</li>
+        <li>White‑glove onboarding for major brands</li>
+        <li>Partnership with existing registrars</li>
+        <li>Integration with popular platforms</li>
+      </ul>
+
+      <p><strong>Phase 3: Consumers (Months 12+)</strong></p>
+
+      <ul>
+        <li>Browser extensions for Chrome/Firefox/Safari</li>
+        <li>Mobile apps for iOS/Android</li>
+        <li>Marketing campaigns targeting specific communities</li>
+        <li>Influencer partnerships and sponsorships</li>
+      </ul>
 
       <p><strong>Pragmatic Governance</strong>: For the first two years, a small team makes decisions quickly. No months‑long governance debates about minor technical details. No committee paralysis. Decisions in days, not months.</p>
 
@@ -378,9 +400,9 @@
       <h2>4. Technical Architecture</h2>
       <h3>4.1 Blockchain Layer</h3>
 
-      <p>Dap builds on the proven foundations of Bitcoin and Handshake while fixing their limitations. We use a UTXO‑based blockchain with enhanced covenants designed for domain name operations.</p>
+      <p>Dap builds on proven foundations while fixing the limitations of previous systems. We use a UTXO‑based blockchain with enhanced covenants designed for domain name operations.</p>
 
-      <p><strong>What We Keep</strong>:</p>
+      <p><strong>Core Design Principles</strong>:</p>
 
       <ul>
         <li>UTXO model for simplicity and scalability</li>
@@ -389,7 +411,7 @@
         <li>Open participation without permission</li>
       </ul>
 
-      <p><strong>What We Improve</strong>:</p>
+      <p><strong>Key Improvements</strong>:</p>
 
       <ul>
         <li>Simplified covenant types focused on real‑world use cases</li>
@@ -419,11 +441,11 @@
         <li>Sustainable security model</li>
       </ul>
 
-      <p>But we emphasize: <strong>Technical superiority means nothing without adoption</strong>. Handshake had “superior” technology. We judge our consensus by whether it enables products, not whether it wins academic awards.</p>
+      <p>But we emphasize: <strong>Technical superiority means nothing without adoption</strong>. We judge our consensus by whether it enables products, not whether it wins academic awards.</p>
 
       <h3>4.3 DNS Integration That Actually Works</h3>
 
-      <p>Unlike Handshake’s “build it and hope” approach, Dap launches with complete DNS integration:</p>
+      <p>Unlike other projects’ “build it and hope” approach, Dap launches with complete DNS integration:</p>
 
       <p><strong>Day One Compatibility</strong>:</p>
 
@@ -431,8 +453,8 @@
         <li>Full DNS protocol support</li>
         <li><a href="https://en.wikipedia.org/w/index.php?title=Domain_Name_System_Security_Extensions&useskin=vector&ref=dap.sh">DNSSEC</a> implementation</li>
         <li>Standard resolver compatibility</li>
-        <li>Browser extensions for Chrome, Firefox, Safari</li>
-        <li>Mobile applications for iOS and Android</li>
+        <li>Browser extensions for Chrome, Firefox, Safari</li>
+        <li>Mobile applications for iOS and Android</li>
       </ul>
 
       <p><strong>Advanced Features</strong>:</p>
@@ -441,7 +463,7 @@
         <li>SSH fingerprints (SSHFP)</li>
         <li>TLS certificate pinning (TLSA)</li>
         <li>Email authentication (DKIM/SPF/DMARC)</li>
-        <li>Custom record types for Web3</li>
+        <li>Custom record types for Web3</li>
       </ul>
 
       <p><strong>Measurable Success</strong>:</p>
@@ -458,9 +480,9 @@
 
     <section id="strategy">
       <h2>5. Ecosystem Development Strategy</h2>
-      <h3>5.1 The Anti‑Handshake Approach</h3>
+      <h3>5.1 The Anti‑Maximalist Approach</h3>
 
-      <p>Where Handshake relied on spontaneous emergence, Dap actively cultivates its ecosystem:</p>
+      <p>Where other projects relied on spontaneous emergence, Dap actively cultivates its ecosystem:</p>
 
       <p><strong>Centralized Kickstart</strong>: The Dap Foundation initially coordinates development, funds builders, and drives adoption. This is temporary centralization for permanent decentralization. We’ll sunset the foundation’s special powers after achieving product‑market fit.</p>
 
@@ -505,7 +527,7 @@
 
       <h3>5.3 Builder Incentives</h3>
 
-      <p>We explicitly favor builders over speculators:</p>
+      <p>We explicitly favor builders over speculators:</p>
 
       <p><strong>Testnet Rewards</strong>: Developers who build during testnet receive GRP token grants at mainnet launch. The more you build, the more you earn.</p>
 
@@ -516,9 +538,9 @@
       <p><strong>Anti‑Speculation Measures</strong>:</p>
 
       <ul>
-        <li>TLD owners must demonstrate usage within 1 year or face reclaim</li>
-        <li>Multiple TLD ownership requires proven utilization of existing TLDs</li>
-        <li>Squatting penalties fund builder grants</li>
+        <li>TLD owners must demonstrate usage within 1 year or face reclaim</li>
+        <li>Multiple TLD ownership requires proven utilization of existing TLDs</li>
+        <li>Squatting penalties fund builder grants</li>
       </ul>
 
       <p>We want builders, not holders. Users, not speculators. Products, not promises.</p>
@@ -528,60 +550,89 @@
       <h2>6. TLD Auction System</h2>
       <h3>6.1 Designed for Use, Not Speculation</h3>
 
-      <p>Dap’s auction system prioritizes utilization:</p>
+      <p>Dap’s auction system prioritizes utilization:</p>
 
       <p><strong>Open Auction Format</strong>: Simple eBay‑style bidding everyone understands. No Vickrey auction complexity that confuses users and enables gaming.</p>
 
       <p><strong>Progressive Minimums</strong>:</p>
 
       <ul>
-        <li>Single‑letter TLDs: 10M GRP minimum</li>
-        <li>Two‑letter TLDs: 1M GRP minimum</li>
-        <li>Three‑letter TLDs: 100K GRP minimum</li>
-        <li>Longer TLDs: 10K GRP minimum</li>
+        <li>Single‑letter TLDs: 10M GRP minimum</li>
+        <li>Two‑letter TLDs: 1M GRP minimum</li>
+        <li>Three‑letter TLDs: 100K GRP minimum</li>
+        <li>Longer TLDs: 10K GRP minimum</li>
       </ul>
 
       <p><strong>Build Requirements</strong>: TLD winners must:</p>
 
       <ul>
-        <li>Set nameservers within 30 days</li>
-        <li>Demonstrate registration system within 90 days</li>
-        <li>Show active usage within 1 year</li>
-        <li>Or face automatic reclaim and re‑auction</li>
+        <li>Set nameservers within 30 days</li>
+        <li>Demonstrate registration system within 90 days</li>
+        <li>Show active usage within 1 year</li>
+        <li>Or face automatic reclaim and re‑auction</li>
       </ul>
 
       <p><strong>Builder Advantages</strong>:</p>
 
       <ul>
-        <li>Proven developers get 20% auction discount</li>
-        <li>Ecosystem contributors get priority access</li>
-        <li>Multiple TLD bids require utilization proof</li>
+        <li>Proven developers get 20% auction discount</li>
+        <li>Ecosystem contributors get priority access</li>
+        <li>Multiple TLD bids require utilization proof</li>
       </ul>
 
       <h3>6.2 Registry Flexibility</h3>
 
-      <p>TLD owners have complete control over their namespace:</p>
+      <p>TLD owners have complete control over their namespace:</p>
 
       <p><strong>Business Models</strong>:</p>
 
       <ul>
-        <li>Traditional: Charge registration fees</li>
-        <li>Free: Build ecosystem through free domains</li>
-        <li>Token‑Gated: Require NFT/token ownership</li>
-        <li>Verified: KYC/identity requirements</li>
-        <li>Custom: Any model you can imagine</li>
+        <li>Traditional: Charge registration fees</li>
+        <li>Free: Build ecosystem through free domains</li>
+        <li>Token‑Gated: Require NFT/token ownership</li>
+        <li>Verified: KYC/identity requirements</li>
+        <li>Custom: Any model you can imagine</li>
       </ul>
 
       <p><strong>Technical Freedom</strong>:</p>
 
       <ul>
-        <li>Choose any registry software</li>
-        <li>Set any DNS records</li>
-        <li>Implement any policies</li>
+        <li>Choose any registry software</li>
+        <li>Set any DNS records</li>
+        <li>Implement any policies</li>
         <li>Run any infrastructure</li>
       </ul>
 
       <p><strong>The Key Insight</strong>: “Own the whole .COM, not just a domain.” Instead of registering mycompany.com, own .mycompany and control unlimited domains beneath it.</p>
+
+      <h3>6.3 Anti‑Squatting Mechanisms</h3>
+
+      <p>TLD squatting is prevented through economic incentives:</p>
+
+      <p><strong>Usage Requirements</strong>:</p>
+
+      <ul>
+        <li>Year 1: Must have 100+ domains registered</li>
+        <li>Year 2: Must have 1000+ domains registered</li>
+        <li>Or pay 10x renewal fee for unused TLDs</li>
+
+      <p><strong>Renewal Scaling</strong>:</p>
+
+      <ul>
+        <li>Active TLD: 1000 GRP/year</li>
+        <li>Low‑use TLD (<100 domains): 10,000 GRP/year</li>
+        <li>Unused TLD (0 domains): 100,000 GRP/year</li>
+        <li>Automatic reclaim after 2 years unused</li>
+      </ul>
+
+      <p><strong>Bulk Penalties</strong>:</p>
+
+      <ul>
+        <li>1 TLD: Normal price</li>
+        <li>10 TLDs: 2x price each</li>
+        <li>100 TLDs: 5x price each</li>
+        <li>Message: You better use them!</li>
+      </ul>
     </section>
 
     <section id="governance">
@@ -597,7 +648,7 @@
         <li>Emergency responses without delays</li>
       </ul>
 
-      <p>This is explicitly temporary. We need to achieve product‑market fit before decentralizing governance. Handshake proved that premature decentralization equals permanent paralysis.</p>
+      <p>This is explicitly temporary. We need to achieve product‑market fit before decentralizing governance. Other projects proved that premature decentralization equals permanent paralysis.</p>
 
       <h3>7.2 Practical Decentralization</h3>
 
@@ -611,76 +662,67 @@
 
       <p><strong>Default to Action</strong>: Without clear consensus against, we proceed. Inaction is not an option.</p>
 
-      <h3>7.3 Success Metrics That Matter</h3>
+      <h3>7.3 Sunset Provisions</h3>
 
-      <p>We measure governance success by outcomes, not process:</p>
+      <p>All special powers expire automatically:</p>
 
-      <ul>
-        <li>Products shipped per quarter</li>
-        <li>New developers onboarded</li>
-        <li>User growth rate</li>
-        <li>Revenue generated</li>
-        <li>DNS queries served</li>
-      </ul>
-
-      <p>Not:</p>
-
-      <ul>
-        <li>Governance participation rate</li>
-        <li>Decentralization coefficient</li>
-        <li>Token distribution metrics</li>
-        <li>Ideological purity scores</li>
-      </ul>
-
-      <p>Results matter. Process doesn’t.</p>
+      <pre class="dedent"><code class="language-markdown">
+| Component           | Initial Control | Transition      | Final State                    |
+|---------------------|-----------------|-----------------|--------------------------------|
+| Development Fund    | Foundation      | -20% yearly     | Community DAO by Year 5        |
+| Technical Decisions | Core Team       | Gradual opening | Full community by Year 3       |
+| Marketing           | Dedicated Team  | Ongoing         | Professional team (DAO funded) |
+| Partnerships        | Business Dev    | Ongoing         | Professional team (DAO funded) |
+      </code></pre>
     </section>
 
-    <section id="testnet">
-      <h2>8. Extended Testnet: Building, Not Testing</h2>
-      <h3>8.1 12‑Month Minimum</h3>
+    <section id="token">
+      <h2>8. Token Economics</h2>
+      <h3>8.1 GRP Token Distribution</h3>
 
-      <p>Handshake’s 2‑month testnet was barely enough to test the protocol. It provided zero time for ecosystem development. We do the opposite:</p>
+      <p>Total Supply: <strong>420,000,000 GRP</strong></p>
 
-      <ul>
-        <li><strong>Months 1‑2</strong>: Protocol testing and stabilization</li>
-        <li><strong>Months 3‑8</strong>: Developer onboarding and building</li>
-        <li><strong>Months 9‑12</strong>: User acquisition and product refinement</li>
-        <li><strong>Month 12+</strong>: Mainnet launch only after ecosystem exists</li>
-      </ul>
-
-      <p>This isn’t about perfecting the protocol—it’s about building the ecosystem. The protocol is useless without applications.</p>
-
-      <h3>8.2 Testnet Incentives</h3>
-
-      <p>We pay people to build during testnet:</p>
+      <p><strong>Distribution</strong>:</p>
 
       <ul>
-        <li><strong>Developer Grants</strong>: $100K‑$1M for serious applications</li>
-        <li><strong>Bug Bounties</strong>: Up to $100K for critical issues</li>
-        <li><strong>User Rewards</strong>: Token airdrops for active testnet users</li>
-        <li><strong>Partnership Incentives</strong>: Revenue guarantees for early adopters</li>
+        <li>Mining Rewards: 70% (294M GRP)</li>
+        <li>Developer Fund: 10% (42M GRP)</li>
+        <li>Ecosystem Grants: 7.5% (31.5M GRP)</li>
+        <li>Treasury: 7.5% (31.5M GRP)</li>
+        <li>Advisors: 2.5% (10.5M GRP)</li>
+        <li>Marketing: 2.5% (10.5M GRP)</li>
       </ul>
 
-      <p>Yes, this costs money. Yes, it’s somewhat centralized. It’s how successful ecosystems bootstrap. Organic growth is a luxury for established networks.</p>
+      <p><strong>Why 70% to Miners</strong>: Unlike other projects that waste tokens on unclaimed airdrops or insider allocations, Dap puts the overwhelming majority in the hands of those securing the network. Miners are the backbone of Dap.</p>
 
-      <h3>8.3 Launch Criteria</h3>
+      <h3>8.2 Deflationary Mechanics</h3>
 
-      <p>We don’t launch mainnet until:</p>
+      <p>All TLD auction proceeds are permanently burned:</p>
+
+      <p><strong>Burn Projections</strong>:</p>
 
       <ul>
-        <li>✅ 10+ production‑ready applications</li>
-        <li>✅ 1,000+ active developers</li>
-        <li>✅ 10,000+ daily users</li>
-        <li>✅ 100K+ daily DNS queries</li>
-        <li>✅ 5+ registry implementations</li>
-        <li>✅ 3+ browser integrations</li>
-        <li>✅ Proven business models</li>
+        <li>Year 1: 1‑2M GRP burned</li>
+        <li>Year 5: 10‑15M GRP burned cumulative</li>
+        <li>Year 10: 25‑35M GRP burned cumulative</li>
+        <li>Long‑term: 5‑10% of supply permanently removed</li>
       </ul>
 
-      <p>No arbitrary dates. No pressure from token holders. Launch when ready, not when scheduled.</p>
+      <p><strong>Economic Security</strong>: As supply decreases through burning while demand increases through adoption, GRP becomes increasingly valuable, ensuring long‑term mining incentives even as block rewards decrease.</p>
+
+      <h3>8.3 No Premine Games</h3>
+
+      <p>Unlike other projects with complex token swaps or conversion mechanisms:</p>
+
+      <ul>
+        <li><strong>Pure GRP from day one</strong>: No confusion, no conversion rates</li>
+        <li><strong>No insider advantages</strong>: Everyone starts equal</li>
+        <li><strong>No wasted allocations</strong>: Every GRP has a purpose</li>
+        <li><strong>Clear value proposition</strong>: “420M GRP. 70% to miners. 30% to builders.”</li>
+      </ul>
     </section>
 
-    <section id="business">
+    <section id="icann">
       <h2>9. ICANN Cooperation, Not Competition</h2>
       <h3>9.1 Pragmatic Coexistence</h3>
 
@@ -721,28 +763,28 @@
       <p>We don’t wait for the world to discover us—we go to them.</p>
     </section>
 
-    <section id="business">
+    <section id="focus">
       <h2>10. The Anti‑Maximalist Manifesto</h2>
       <h3>10.1 What We’re NOT</h3>
 
       <ul>
-        <li><strong>Not trying to destroy ICANN</strong>: We coexist and complement</li>
-        <li><strong>Not purely decentralized</strong>: We coordinate when necessary</li>
-        <li><strong>Not waiting for perfection</strong>: We ship when good enough</li>
-        <li><strong>Not hostile to business</strong>: We embrace commercial success</li>
-        <li><strong>Not ideologically driven</strong>: We’re results driven</li>
-        <li><strong>Not building for cypherpunks</strong>: We’re building for everyone</li>
+        <li><strong>Not trying to destroy ICANN</strong>: We coexist and complement</li>
+        <li><strong>Not purely decentralized</strong>: We coordinate when necessary</li>
+        <li><strong>Not waiting for perfection</strong>: We ship when good enough</li>
+        <li><strong>Not hostile to business</strong>: We embrace commercial success</li>
+        <li><strong>Not ideologically driven</strong>: We’re results driven</li>
+        <li><strong>Not building for cypherpunks</strong>: We’re building for everyone</li>
       </ul>
 
       <h3>10.2 What We ARE</h3>
 
       <ul>
-        <li><strong>Building products</strong>: Code running in production</li>
-        <li><strong>Shipping working code</strong>: Weekly releases, not yearly promises</li>
-        <li><strong>Growing an ecosystem</strong>: Active developer relations and support</li>
-        <li><strong>Creating utility</strong>: Solving real problems for real users</li>
-        <li><strong>Embracing pragmatism</strong>: The best solution that actually ships</li>
-        <li><strong>Measuring success</strong>: By usage, not ideology</li>
+        <li><strong>Building products</strong>: Code running in production</li>
+        <li><strong>Shipping working code</strong>: Weekly releases, not yearly promises</li>
+        <li><strong>Growing an ecosystem</strong>: Active developer relations and support</li>
+        <li><strong>Creating utility</strong>: Solving real problems for real users</li>
+        <li><strong>Embracing pragmatism</strong>: The best solution that actually ships</li>
+        <li><strong>Measuring success</strong>: By usage, not ideology</li>
       </ul>
 
       <h3>10.3 Our Metrics</h3>
@@ -769,205 +811,119 @@
         <li>Social media followers</li>
       </ul>
 
-      <p>Build. Ship. Iterate. Everything else is noise.</p>
+      <p>Build. Ship. Iterate. Everything else is noise.</p>
     </section>
 
     <section id="success">
-      <h2>11. Why Dap Will Succeed Where Handshake Failed</h2>
+      <h2>11. Why Dap Will Succeed Where Others Failed</h2>
       <h3>11.1 Leadership Exists</h3>
 
-      <p>Unlike Handshake’s headless approach, Dap has clear leadership:
+      <p>Unlike other projects’ headless approach, Dap has clear leadership:</p>
 
       <p><strong>Technical Direction</strong>: Core team makes architectural decisions quickly and decisively. No endless bikeshedding over minor details.</p>
 
-      <p><strong>Ecosystem Coordination</strong>: Dedicated team manages developer relations, partnerships, and user growth. Not left to chance.</p>
+      <p><strong>Ecosystem Coordination</strong>: Dedicated team manages developer relations, partnerships, and user growth. Not left to “emerge organically.”</p>
 
-      <p><strong>Conflict Resolution</strong>: Disputes resolved quickly by designated authorities, not endless community debates.</p>
+      <p><strong>Resource Allocation</strong>: Foundation distributes grants based on results, not politics. Ship code, get funded.</p>
 
-      <p><strong>Accountability</strong>: Leaders are known, reachable, and accountable for results. No hiding behind “decentralization.”</p>
+      <p><strong>Accountability</strong>: Leaders have real names, real reputations, and real skin in the game. No hiding behind anonymous accounts.</p>
 
-      <p>Leadership isn’t permanent, but it’s necessary for bootstrapping.</p>
+      <h3>11.2 Sustainable Economics</h3>
 
-      <h3>11.2 Builders First</h3>
+      <p><strong>For Miners</strong>: 70% of supply ensures profitable mining even at low token prices. No dependency on unsustainable subsidies.</p>
 
-      <p>Every decision filtered through one question: “Does this help builders?”</p>
+      <p><strong>For Developers</strong>: Direct grants, revenue sharing, and clear monetization paths. Build on Dap, make money.</p>
 
-      <p><strong>Developer Experience</strong>:</p>
+      <p><strong>For Users</strong>: Actual utility from day one. Use domains for websites, email, identity. Not just speculation.</p>
 
-      <ul>
-        <li>Modern GraphQL APIs</li>
-        <li>TypeScript‑first SDKs</li>
-        <li>Comprehensive documentation</li>
-        <li>Responsive support</li>
-        <li>Regular workshops</li>
-      </ul>
+      <p><strong>For TLD Owners</strong>: Run a real business selling domains. Not just holding and hoping.</p>
 
-      <p><strong>Economic Incentives</strong>:</p>
+      <h3>11.3 Pragmatic Timeline</h3>
 
-      <ul>
-        <li>Grants for building</li>
-        <li>Revenue sharing</li>
-        <li>Token rewards</li>
-        <li>Priority TLD access</li>
-        <li>Marketing support</li>
-      </ul>
+      <p><strong>Year 0 (Testnet)</strong>: Build, test, iterate. Launch when ready, not when scheduled.</p>
 
-      <p><strong>Cultural Priority</strong>:</p>
+      <p><strong>Year 1</strong>: 10+ production applications, 100+ active developers, 10K+ daily users.</p>
 
-      <ul>
-        <li>Builders celebrated over holders</li>
-        <li>Products showcased over price</li>
-        <li>Usage metrics over market cap</li>
-        <li>Shipping velocity over governance participation</li>
-      </ul>
+      <p><strong>Year 2</strong>: Browser integration, enterprise adoption, 100K+ daily users.</p>
 
-      <p>We optimize for people who build things users want.</p>
+      <p><strong>Year 3</strong>: Mainstream awareness, 1M+ daily users, profitable ecosystem.</p>
 
-      <h3>11.3 Pragmatic Decentralization</h3>
-
-      <p>We decentralize strategically, not dogmatically:</p>
-
-      <p><strong>Progressive Decentralization</strong>:</p>
-
-      <ol>
-        <li>Years 0‑2: Centralized bootstrap</li>
-        <li>Years 2‑5: Hybrid governance</li>
-        <li>Years 5+: Full decentralization</li>
-      </ol>
-
-      <p><strong>Practical Trade‑offs</strong>:</p>
-
-      <ul>
-        <li>Accept: Foundation funding for growth</li>
-        <li>Accept: Corporate partnerships for adoption</li>
-        <li>Accept: Marketing for awareness</li>
-        <li>Accept: Leadership for direction</li>
-        <li>Reject: Capture by single entity</li>
-        <li>Reject: Censorship of domains</li>
-        <li>Reject: Permissioned participation</li>
-        <li>Reject: Forever centralization</li>
-      </ul>
-
-      <p><strong>Success Enables Decentralization</strong>: We can only decentralize what exists. Build first, decentralize second.</p>
+      <p><strong>Year 5</strong>: Serving 1B+ DNS queries daily. Undeniable product‑market fit.</p>
     </section>
 
-    <section id="action">
-      <h2>12. Call to Action</h2>
-      <h3>12.1 For Builders</h3>
+    <section id="fin">
+      <h2>12. Conclusion</h2>
 
-      <p>Join us if you want to:</p>
+      <p>Dap represents a fundamental shift in how blockchain projects approach development and adoption. We reject the failed maximalist approach that prioritizes ideological purity over user value. We embrace pragmatic trade‑offs that enable us to ship products and serve users.</p>
 
-      <ul>
-        <li>Build products people want to use</li>
-        <li>Receive grants and support</li>
-        <li>Shape a growing ecosystem</li>
-        <li>Get priority TLD access</li>
-        <li>Work with pragmatic teammates</li>
-      </ul>
-
-      <p>Don’t join if you want to:</p>
+      <p>The domain name system is too important to leave in the hands of:</p>
 
       <ul>
-        <li>Debate governance endlessly</li>
-        <li>Prioritize ideology over shipping</li>
-        <li>Wait for perfect decentralization</li>
-        <li>Build without users</li>
-        <li>Speculate without creating</li>
+        <li>ICANN’s bureaucracy and gatekeeping</li>
+        <li>Blockchain projects that refuse to ship</li>
+        <li>Ideological purists who hate users</li>
+        <li>Speculators who build nothing</li>
       </ul>
 
-      <h3>12.2 For Users</h3>
-
-      <p>We need users who:</p>
+      <p>Dap will succeed because we:</p>
 
       <ul>
-        <li>Use applications daily</li>
-        <li>Provide feedback actively</li>
-        <li>Report bugs honestly</li>
-        <li>Recommend to friends</li>
-        <li>Judge by utility</li>
+        <li>Ship code weekly, not yearly</li>
+        <li>Pursue users aggressively, not passively</li>
+        <li>Build products people want, not protocols nobody uses</li>
+        <li>Measure success by adoption, not ideology</li>
       </ul>
 
-      <p>Not users who:</p>
+      <p>The internet deserves a naming system that is both decentralized AND useful. Previous projects proved you can build one or the other. Dap will prove you can build both.</p>
 
-      <ul>
-        <li>Hold tokens passively</li>
-        <li>Complain without contributing</li>
-        <li>Demand perfection immediately</li>
-        <li>Confuse potential with achievement</li>
-        <li>Value ideology over functionality</li>
-      </ul>
+      <p>Join us in building the future of internet naming. Not through endless debates and governance theater, but through shipping code and serving users.</p>
 
-      <h3>For Handshake Refugees</h3>
-
-      <p>We understand your frustration. You joined Handshake to build the future but found debates and dysfunction.</p>
-
-      <p>Dap offers:</p>
-
-      <ul>
-        <li>The building environment Handshake promised</li>
-        <li>Support Handshake never provided</li>
-        <li>Users Handshake never attracted</li>
-        <li>Leadership Handshake rejected</li>
-        <li>Pragmatism Handshake feared</li>
-      </ul>
-
-      <p>Bring your experience, leave the maximalism. Help us build what Handshake could have been.</p>
-    </section>
-
-    <section id="conclusion">
-      <h2>13. Conclusion</h2>
-
-      <p>Handshake proved that decentralized naming is technically possible; it proved that technical possibility alone is worthless without products, users, and utility.</p>
-
-      <p>Dap learns from both Handshake’s innovations and its failures. We keep the revolutionary technology while discarding the maximalist ideology that prevented its adoption. We choose pragmatism over purity, building over debating, and shipping over philosophizing.</p>
-
-      <p>The best naming system isn’t the most decentralized—it’s the one people use. The most successful blockchain isn’t the most ideologically pure—it’s the one that solves real problems for real people.</p>
-
-      <p>Perfect decentralization without adoption is an expensive science experiment. Good‑enough decentralization with millions of users changes the world.</p>
-
-      <p>We choose to change the world.</p>
-
-      <p>Join us in building the naming system the internet deserves—not perfect, but shipped; not pure, but useful; not ideological, but practical.</p>
-
-      <p><strong>The best time to plant a tree was 20 years ago. The second best time is now.</strong></p>
-
-      <p><strong>The best naming system is the one that exists.</strong></p>
-
-      <p><strong>Let’s build.</strong></p>
+      <p><strong>Dap: Because the best protocol is the one that ships.</strong></p>
     </section>
 
     <hr/>
 
     <section id="appendices">
       <h2>Appendices</h2>
-      <h3>Appendix A: Handshake Post‑Mortem</h3>
+      <h3>Appendix A: Technical Specifications</h3>
 
-      <p><strong>What Went Right</strong>:</p>
-
-      <ul>
-        <li>Proved blockchain‑based naming possible</li>
-        <li>Demonstrated UTXO covenants for domains</li>
-        <li>Created initial developer interest</li>
-        <li>Raised awareness of ICANN alternatives</li>
-      </ul>
-
-      <p><strong>What Went Wrong</strong>:</p>
+      <p><strong>Blockchain Parameters</strong>:</p>
 
       <ul>
-        <li>No ecosystem coordination or support</li>
-        <li>Maximalist culture rejected pragmatism</li>
-        <li>Zero focus on user experience</li>
-        <li>No product development incentives</li>
-        <li>Community paralysis from governance debates</li>
-        <li>Technical superiority complex prevented iteration</li>
-        <li>Builders abandoned for lack of support</li>
+        <li>Block time: 5 minutes</li>
+        <li>Block size: 4 MB maximum</li>
+        <li>Consensus: VDF + VRF + Blake3 PoW</li>
+        <li>Token supply: 420,000,000 GRP</li>
+        <li>Halving schedule: Every 4 years</li>
+        <li>Minimum TX fee: 0.01 GRP</li>
       </ul>
 
-      <p><strong>Key Lesson</strong>: Technology enables possibilities; coordination creates realities.</p>
+      <p><strong>Covenant Types</strong>:</p>
+
+      <ul>
+        <li>AUCTION: Initiate TLD auction</li>
+        <li>BID: Place auction bid</li>
+        <li>REVEAL: Reveal blind bid</li>
+        <li>CLAIM: Claim won auction</li>
+        <li>REGISTER: Register TLD ownership</li>
+        <li>UPDATE: Update TLD records</li>
+        <li>TRANSFER: Transfer TLD ownership</li>
+        <li>RENEW: Renew TLD registration</li>
+      </ul>
+
+      <p><strong>DNS Integration</strong>:</p>
+
+      <ul>
+        <li>Full RFC compliance</li>
+        <li>DNSSEC support</li>
+        <li>< 100ms resolution target</li>
+        <li>99.9% uptime SLA</li>
+        <li>IPv4 and IPv6 support</li>
+      </ul>
 
       <h3>Appendix B: Pragmatic Trade‑offs</h3>
 
-      <p>What Centralization We Accept:</p>
+      <p>What Centralization We Accept:</p>
 
       <pre class="dedent"><code class="language-markdown">
 | Component           | Centralization        | Duration | Justification       |
@@ -982,70 +938,69 @@
       <p>Sunset Provisions:</p>
 
       <ul>
-        <li>Foundation voting power decreases 20% yearly</li>
-        <li>Development fund transitions to DAO control</li>
-        <li>Technical decisions shift to governance</li>
-        <li>All special powers expire by year 5</li>
+        <li>Foundation voting power decreases 20% yearly</li>
+        <li>Development fund transitions to DAO control</li>
+        <li>Technical decisions shift to governance</li>
+        <li>All special powers expire by year 5</li>
       </ul>
 
-      <h3>Appendix C: Success Stories We Want</h3>
+      <h3>Appendix C: Success Stories We Want</h3>
 
-      <p><strong>Year 1</strong>: “Startup Raises $5M Using .startup TLD”</p>
+      <p><strong>Year 1</strong>: “Startup Raises $5M Using .startup TLD”</p>
 
       <ul>
-        <li>Company uses .startup domain for all properties</li>
-        <li>Investors see innovation mindset</li>
-        <li>Media coverage drives Dap awareness</li>
+        <li>Company uses .startup domain for all properties</li>
+        <li>Investors see innovation mindset</li>
+        <li>Media coverage drives Dap awareness</li>
       </ul>
 
-      <p><strong>Year 2</strong>: “Fortune 500 Migrates to .brand TLD”</p>
+      <p><strong>Year 2</strong>: “Fortune 500 Migrates to .brand TLD”</p>
 
       <ul>
-        <li>Major corporation adopts Dap for brand protection</li>
-        <li>Demonstrates enterprise viability</li>
-        <li>Drives institutional adoption</li>
+        <li>Major corporation adopts Dap for brand protection</li>
+        <li>Demonstrates enterprise viability</li>
+        <li>Drives institutional adoption</li>
       </ul>
 
-      <p><strong>Year 3</strong>: “Developer Earns $1M from Domain App”</p>
+      <p><strong>Year 3</strong>: “Developer Earns $1M from Domain App”</p>
 
       <ul>
-        <li>Individual developer builds successful service</li>
-        <li>Proves ecosystem economic opportunity</li>
+        <li>Individual developer builds successful service</li>
+        <li>Proves ecosystem economic opportunity</li>
         <li>Attracts more builders</li>
       </ul>
 
-      <p><strong>Year 5</strong>: “Dap Serves 1 Billion DNS Queries Daily”</p>
+      <p><strong>Year 5</strong>: “Dap Serves 1 Billion DNS Queries Daily”</p>
 
       <ul>
-        <li>Achieving scale comparable to major DNS providers</li>
-        <li>Real utility at global scale</li>
-        <li>Undeniable product‑market fit</li>
+        <li>Achieving scale comparable to major DNS providers</li>
+        <li>Real utility at global scale</li>
+        <li>Undeniable product‑market fit</li>
       </ul>
 
       <h3>Appendix D: The Anti‑Patterns We Avoid</h3>
 
-      <p><strong>Governance Paralysis</strong>: Handshake spent months debating minor parameter changes while shipping nothing. We decide in days and iterate.</p>
+      <p><strong>Governance Paralysis</strong>: Other projects spent months debating minor parameter changes while shipping nothing. We decide in days and iterate.</p>
 
-      <p><strong>Purity Spirals</strong>: Handshake community attacked any pragmatism as betrayal. We celebrate what works.</p>
+      <p><strong>Purity Spirals</strong>: Other communities attacked any pragmatism as betrayal. We celebrate what works.</p>
 
-      <p><strong>Technical Superiority Without Usage</strong>: Handshake built “the best” system nobody uses. We build good‑enough systems millions use.</p>
+      <p><strong>Technical Superiority Without Usage</strong>: Others built “the best” system nobody uses. We build good‑enough systems millions use.</p>
 
-      <p><strong>Community Gatekeeping</strong>: Handshake’s toxic maximalism drove away builders. We welcome anyone who ships.</p>
+      <p><strong>Community Gatekeeping</strong>: Toxic maximalism drove away builders. We welcome anyone who ships.</p>
 
-      <p><strong>Speculation Over Utility</strong>: Handshake optimized for token price over product development. We optimize for usage metrics.</p>
+      <p><strong>Speculation Over Utility</strong>: Others optimized for token price over product development. We optimize for usage metrics.</p>
 
-      <p><strong>Documentation Negligence</strong>: Handshake never properly documented APIs or tools. We maintain comprehensive, updated documentation.</p>
+      <p><strong>Documentation Negligence</strong>: Others never properly documented APIs or tools. We maintain comprehensive, updated documentation.</p>
 
-      <p><strong>User Hostility</strong>: Handshake expected users to understand blockchain complexity. We hide complexity behind simple interfaces.</p>
+      <p><strong>User Hostility</strong>: Others expected users to understand blockchain complexity. We hide complexity behind simple interfaces.</p>
     </section>
 
     <hr/>
 
     <section id="fin">
-      <p>Dap: Because the best protocol is the one that <em>ships</em>.</p>
       <p>Join us: <a href="https://dap.sh">https://dap.sh</a></p>
-      <p>Version 4 - Draft</p>
-      <p>Last Updated: 2025.08.21</p>
+      <p>Version 5 - Draft</p>
+      <p>Last Updated: 2025.10.05</p>
     </section>
   </body>
 

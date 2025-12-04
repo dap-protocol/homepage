@@ -9,7 +9,23 @@ import { sveltekit } from "@sveltejs/kit/vite";
 /*** EXPORT ------------------------------------------- ***/
 
 export default defineConfig({
-  plugins: [sveltekit()],
+  build: {
+    minify: "terser",
+    sourcemap: false,
+    target: "esnext",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
+  },
+  esbuild: {
+    target: "esnext"
+  },
+  plugins: [
+    sveltekit()
+  ],
   server: {
     // allowedHosts: [
     //   "you.local",
@@ -18,5 +34,8 @@ export default defineConfig({
     cors: true,
     host: true,
     hmr: true
+  },
+  ssr: {
+    noExternal: true
   }
 });

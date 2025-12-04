@@ -1,8 +1,9 @@
 # File
 .DS_Store
 .env
-Thumbs.db
 *.lock
+deploy.sh
+Thumbs.db
 
 # Folder
 .svelte-kit

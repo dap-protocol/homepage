@@ -1,2 +1,10 @@
+# File
 .DS_Store
+.env
 Thumbs.db
+*.lock
+
+# Folder
+.svelte-kit
+build
+node_modules

@@ -35,5 +35,5 @@
     "test:svelte": "svelte-check"
   },
   "type": "module",
-  "version": "2025.12.03.1"
+  "version": "2026.02.04"
 }

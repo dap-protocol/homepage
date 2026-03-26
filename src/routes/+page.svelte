@@ -355,7 +355,7 @@
     <u-cell span=6>
       <h3>roadmap</h3>
 
-      <p>our testnet is going to be <strong>busy</strong>; consensus, mining, auctions, wallet, dns, edge-cases, tutorials, &c. if you’re interested in participating or following along, our <a class="soon" href="https://chat.dap.sh">forum</a> is the best place to do that.</p>
+      <p>our testnet is going to be <strong>busy</strong>; consensus, mining, auctions, wallet, dns, edge-cases, tutorials, &c. if you’re interested in participating or following along, our <a href="https://www.webb.page/index.php?board=5.0">forum</a> is the best place to do that.</p>
     </u-cell>
 
     <u-cell span=5>

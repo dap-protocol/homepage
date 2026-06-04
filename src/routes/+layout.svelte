@@ -1,5 +1,6 @@
 <script lang="ts">
   /*** UTILITY ------------------------------------------ ***/
+  import DSGN from "$lib/component/DSGN.svelte";
   import favicon from "$lib/asset/favicon.svg";
   import Footer from "$lib/component/Footer.svelte";
 
@@ -48,3 +49,4 @@
 </main>
 
 <Footer/>
+<DSGN/>

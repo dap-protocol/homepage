@@ -9,6 +9,7 @@
     font-size: 12px;
     letter-spacing: 0.025rem;
     line-height: 1;
+    overflow: hidden;
     padding-bottom: 0.5ch;
     padding-top: 0.5ch;
     position: relative;

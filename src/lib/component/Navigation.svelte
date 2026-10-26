@@ -72,7 +72,7 @@
     <a href="https://whitepaper.dap.sh">whitepaper</a>
     <a href="https://github.com/dap-protocol">github</a>
     <a class="soon" href="https://explore.dap.sh">explorer</a>
-    <a href="https://www.webb.page/index.php?board=5.0">forum</a>
+    <a href="https://pr.inc.sh/@dap">mastodon</a>
     <a class="soon" href="https://learn.dap.sh">documentation</a>
   </div>
 </nav>
